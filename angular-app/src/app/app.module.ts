@@ -14,7 +14,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
   imports: [
     NgbModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
