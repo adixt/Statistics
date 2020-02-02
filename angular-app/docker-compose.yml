@@ -1,0 +1,10 @@
+version: '3'
+services:
+  angular-web:
+    build: .
+    container_name: ids-statistics
+    ports:
+      - 4200:4200
+    volumes:
+      - .:/app
+      - /app/node_modules
