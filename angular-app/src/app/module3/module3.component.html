@@ -1,2 +1,56 @@
 <p>module3 works!</p>
 <h1>Adam Dziomdziora</h1>
+<h2>TODO:</h2>
+<h3>miary rozproszenia klasyczne:</h3>
+<ul>
+    <li>odchylenie przeciętne</li>
+    <li>wariancja</li>
+    <li>odchylenie standardowe</li>
+    <li>odchylenie standardowe dla próby</li>
+</ul>
+
+<h3>test zgodności Pearsona</h3>
+
+<div class="my">
+    <h1>Wariancja</h1>
+    <form (ngSubmit)="generate()">
+        <div class="row">
+            <div class="form-group col-6">
+                <label for="numbersToGenerateInput">Number of elements</label>
+                <input type="number" [(ngModel)]="NumbersToGenerate" min="1" class="form-control" name="numbersToGenerateInput" required>
+            </div>
+
+            <div class="form-group col-6">
+                <label for="generatedNumbersInput">Generated numbers</label>
+                <textarea [(ngModel)]="GeneratedNumbers" class="form-control min" name="generatedNumbersInput" readonly> </textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-6">
+
+                <label for="varianceInput">Numbers variance</label>
+                <input type="number" [(ngModel)]="ComputedVariance" class="form-control" name="varianceInput" readonly>
+            </div>
+
+            <div class="form-group col-6">
+                <label for="stdInput">Numbers std</label>
+                <input type="number" [(ngModel)]="StandardDeviation" class="form-control" name="stdInput" readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-12">
+                <label for="zIndexesInput">z-indexes</label>
+                <textarea [(ngModel)]="ZIndexes" class="form-control min" name="zIndexesInput" readonly> </textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="ShouldDisableSubmit">Submit</button>
+    </form>
+
+    <div>
+        <button (click)="drawChartVelocity()">show Graph Velocity</button>
+        <div id="googleChartHereVelocity" style="width: 800px; height: 400px;"></div>
+    </div>
+</div>
