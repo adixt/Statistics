@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyMath } from './mymath';
+import { Learn } from './learn';
 declare var google: any;
 @Component({
   selector: 'app-module3',
@@ -13,21 +14,38 @@ export class Module3Component implements OnInit {
   private numbersToGenerate = 0;
   private generatedNumbers = [];
   private numbersVariance = 0;
+  private numbersVarianceSample = 0;
   private numbersStandardDeviation = 0;
+  private numbersStandardDeviationSample = 0;
   private numbersZIndexes = [];
+  private numbersMeanAbsoluteDeviation = 0;
+
+  get LearnCode(): string {
+    const codes = Learn.Codes;
+    return codes;
+  }
 
   get ZIndexes(): number[] {
     return this.numbersZIndexes;
   }
 
   get ComputedVariance(): number {
-    return this.numbersStandardDeviation;
-  }
-  get StandardDeviation(): number {
     return this.numbersVariance;
   }
+  get ComputedVarianceSample(): number {
+    return this.numbersVarianceSample;
+  }
+  get StandardDeviation(): number {
+    return this.numbersStandardDeviation;
+  }
+  get StandardDeviationSample(): number {
+    return this.numbersStandardDeviationSample;
+  }
+  get MeanAbsoluteDeviation(): number {
+    return this.numbersMeanAbsoluteDeviation;
+  }
   get ShouldDisableSubmit(): boolean {
-    return this.numbersToGenerate < 1;
+    return this.numbersToGenerate < 1 && this.generatedNumbers.length < 1;
   }
   get NumbersToGenerate(): number {
     return this.numbersToGenerate;
@@ -38,14 +56,23 @@ export class Module3Component implements OnInit {
   get GeneratedNumbers(): number[] {
     return this.generatedNumbers;
   }
+  set ManuallyGeneratedNumbers(value: string) {
+    const values = value
+      .split(/[\s,\\n]+/)
+      .filter((el) => {
+        return el != null && el !== '';
+      }).map((x) => {
+        return parseFloat(x);
+      });
+    this.generatedNumbers = values;
+    this.CalculateStatisticValues();
+  }
 
   ngOnInit() {
     // tslint:disable-next-line: object-literal-key-quotes
     google.charts.load('current', { 'packages': ['line'] });
-    google.charts.setOnLoadCallback(() => this.drawChartVelocity);
-
+    google.charts.setOnLoadCallback(() => this.drawChart);
   }
-
 
   public generate() {
     const max = 10;
@@ -53,12 +80,20 @@ export class Module3Component implements OnInit {
     this.generatedNumbers = Array.from({ length: this.numbersToGenerate },
       () => MyMath.randomIntFromInterval(min, max));
 
-    this.numbersVariance = MyMath.variance(this.generatedNumbers);
-    this.numbersStandardDeviation = MyMath.standardDeviation(this.generatedNumbers);
-    this.numbersZIndexes = MyMath.zScores(this.generatedNumbers);
+    this.CalculateStatisticValues();
   }
 
-  drawChartVelocity() {
+  CalculateStatisticValues() {
+    this.numbersVariance = MyMath.variance(this.generatedNumbers);
+    this.numbersVarianceSample = MyMath.varianceSample(this.generatedNumbers);
+    this.numbersStandardDeviation = MyMath.standardDeviation(this.generatedNumbers);
+    this.numbersStandardDeviationSample = MyMath.standardDeviationSample(this.generatedNumbers);
+    this.numbersZIndexes = MyMath.zScores(this.generatedNumbers);
+    this.numbersMeanAbsoluteDeviation = MyMath.meanAbsoluteDeviation(this.generatedNumbers);
+    this.drawChart();
+  }
+
+  drawChart() {
     const data = new google.visualization.DataTable();
     data.addColumn('number', 'VALUE');
     data.addColumn('number', 'NORMAL DISTRIBUTION');
@@ -73,7 +108,7 @@ export class Module3Component implements OnInit {
     data.addRows(output);
 
     const options = {
-      title: 'Company Performance',
+      title: 'Normal distribution',
       curveType: 'function',
       legend: { position: 'bottom' }
     };

@@ -1,7 +1,7 @@
 <p>module3 works!</p>
 <h1>Adam Dziomdziora</h1>
-<h2>TODO:</h2>
-<h3>miary rozproszenia klasyczne:</h3>
+<h3>TODO:</h3>
+<h4>miary rozproszenia klasyczne:</h4>
 <ul>
     <li>odchylenie przeciętne</li>
     <li>wariancja</li>
@@ -9,37 +9,62 @@
     <li>odchylenie standardowe dla próby</li>
 </ul>
 
-<h3>test zgodności Pearsona</h3>
+<h4>test zgodności Pearsona</h4>
 
 <div class="my">
-    <h1>Wariancja</h1>
+    <h1>Miary klasyczne rozproszenia</h1>
     <form (ngSubmit)="generate()">
         <div class="row">
-            <div class="form-group col-6">
+            <div class="form-group col-4">
                 <label for="numbersToGenerateInput">Number of elements</label>
                 <input type="number" [(ngModel)]="NumbersToGenerate" min="1" class="form-control" name="numbersToGenerateInput" required>
             </div>
 
-            <div class="form-group col-6">
+            <div class="form-group col-4">
                 <label for="generatedNumbersInput">Generated numbers</label>
                 <textarea [(ngModel)]="GeneratedNumbers" class="form-control min" name="generatedNumbersInput" readonly> </textarea>
+            </div>
+
+            <div class="form-group col-4">
+                <label for="manuallyGeneratedNumbersInput">OR type manually elements here</label>
+                <textarea [(ngModel)]="ManuallyGeneratedNumbers" class="form-control min" name="manuallyGeneratedNumbersInput"> </textarea>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-6">
 
-                <label for="varianceInput">Numbers variance</label>
+                <label for="varianceInput">Variance</label>
                 <input type="number" [(ngModel)]="ComputedVariance" class="form-control" name="varianceInput" readonly>
             </div>
 
             <div class="form-group col-6">
-                <label for="stdInput">Numbers std</label>
+                <label for="stdInput">Standard Deviation</label>
                 <input type="number" [(ngModel)]="StandardDeviation" class="form-control" name="stdInput" readonly>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="form-group col-6">
+
+                <label for="varianceSampleInput">Variance Sample</label>
+                <input type="number" [(ngModel)]="ComputedVarianceSample" class="form-control" name="varianceSampleInput" readonly>
+            </div>
+            <div class="form-group col-6">
+                <label for="stdSampleInput">Standard Deviation Sample</label>
+                <input type="number" [(ngModel)]="StandardDeviationSample" class="form-control" name="stdSampleInput" readonly>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="form-group col-6">
+                <label for="meanStdInput">Mean absolute deviation</label>
+                <input type="number" [(ngModel)]="MeanAbsoluteDeviation" class="form-control" name="meanStdInput" readonly>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" hidden>
             <div class="form-group col-12">
                 <label for="zIndexesInput">z-indexes</label>
                 <textarea [(ngModel)]="ZIndexes" class="form-control min" name="zIndexesInput" readonly> </textarea>
@@ -50,7 +75,12 @@
     </form>
 
     <div>
-        <button (click)="drawChartVelocity()">show Graph Velocity</button>
-        <div id="googleChartHereVelocity" style="width: 800px; height: 400px;"></div>
+        <button (click)="drawChart()" hidden>Draw graph</button>
+        <div id="googleChartHereVelocity" style="width: 800px; height: 400px;">waiting for the input data...</div>
+    </div>
+
+
+    <div class="terminal">
+        <pre>{{LearnCode}}</pre>
     </div>
 </div>
