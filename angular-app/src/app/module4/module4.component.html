@@ -1,2 +1,41 @@
-<p>module4 works!</p>
 <h1>Szymon Grabia</h1>
+
+<ul>
+    <li>miary asymetrii, współczynnik asymetrii, moment centralny trzeciego rzędu, miara koncentracji,</li>
+    <li>rozkład statystyki z próby,</li>
+    <li>test normalności Shapiro-Wilka,</li>
+</ul>
+
+<h1>[miary asymetrii]</h1>
+
+<p>...</p>
+
+<h1>Shapiro-Wilk test of normality</h1>
+
+<p>
+    Jakiś opis
+    - im wyższe p tym lepiej
+    - i wyższe w też lepiej
+</p>
+
+<div style="text-align: center;">
+    <img src="assets/img/shapiro-wilk.png" alt="">
+</div>
+
+<hr>
+
+<div style="display: flex;">
+    <div style="width: 50%;">
+        <label for="">Samples</label>
+        <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="calculateSw();drawSWHistogram();drawSWColumn();" style="width: 100%;"></textarea>
+    </div>
+    <div style="width: 50%; padding: 10px;">
+        <!-- <p>x = {{ numberList }}</p> -->
+        <p><b>W = {{ sw.w }}</b></p>
+        <p><b>p = {{ sw.p }}</b></p>
+        <div id="googleChartSWHistogram" class="sw-graph">No data</div>
+        <div id="googleChartSWColumn" class="sw-graph">No data</div>
+    </div>
+</div>
+
+<cite>S. S. SHAPIRO, M. B. WILK, An analysis of variance test for normality (complete samples), Biometrika, Volume 52, Issue 3-4, December 1965, Pages 591–611, <a href="https://doi.org/10.1093/biomet/52.3-4.591" target="_blank">https://doi.org/10.1093/biomet/52.3-4.591</a></cite>
