@@ -22,7 +22,7 @@
 
             <div class="form-group col-4">
                 <label for="generatedNumbersInput">Generated numbers</label>
-                <textarea [(ngModel)]="GeneratedNumbers" class="form-control min" name="generatedNumbersInput" readonly> </textarea>
+                <textarea [value]="GeneratedNumbers" class="form-control min" name="generatedNumbersInput" readonly></textarea>
             </div>
 
             <div class="form-group col-4">
@@ -35,12 +35,12 @@
             <div class="form-group col-6">
 
                 <label for="varianceInput">Variance</label>
-                <input type="number" [(ngModel)]="ComputedVariance" class="form-control" name="varianceInput" readonly>
+                <input type="number" [value]="ComputedVariance" class="form-control" name="varianceInput" readonly>
             </div>
 
             <div class="form-group col-6">
                 <label for="stdInput">Standard Deviation</label>
-                <input type="number" [(ngModel)]="StandardDeviation" class="form-control" name="stdInput" readonly>
+                <input type="number" [value]="StandardDeviation" class="form-control" name="stdInput" readonly>
             </div>
 
         </div>
@@ -49,25 +49,25 @@
             <div class="form-group col-6">
 
                 <label for="varianceSampleInput">Variance Sample</label>
-                <input type="number" [(ngModel)]="ComputedVarianceSample" class="form-control" name="varianceSampleInput" readonly>
+                <input type="number" [value]="ComputedVarianceSample" class="form-control" name="varianceSampleInput" readonly>
             </div>
             <div class="form-group col-6">
                 <label for="stdSampleInput">Standard Deviation Sample</label>
-                <input type="number" [(ngModel)]="StandardDeviationSample" class="form-control" name="stdSampleInput" readonly>
+                <input type="number" [value]="StandardDeviationSample" class="form-control" name="stdSampleInput" readonly>
             </div>
         </div>
         <div class="row">
 
             <div class="form-group col-6">
                 <label for="meanStdInput">Mean absolute deviation</label>
-                <input type="number" [(ngModel)]="MeanAbsoluteDeviation" class="form-control" name="meanStdInput" readonly>
+                <input type="number" [value]="MeanAbsoluteDeviation" class="form-control" name="meanStdInput" readonly>
             </div>
         </div>
 
         <div class="row" hidden>
             <div class="form-group col-12">
                 <label for="zIndexesInput">z-indexes</label>
-                <textarea [(ngModel)]="ZIndexes" class="form-control min" name="zIndexesInput" readonly> </textarea>
+                <textarea [value]="ZIndexes" class="form-control min" name="zIndexesInput" readonly> </textarea>
             </div>
         </div>
 
