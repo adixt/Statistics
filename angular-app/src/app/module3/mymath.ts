@@ -126,4 +126,30 @@ export class MyMath {
     return sum;
   }
 
+  static meanInArea(groups: number[], elementsInArea: number[]): number {
+    const allAreas = elementsInArea.reduce((a, b) => a + b);
+    let sumOfElements = 0;
+    for (let i = 0; i < groups.length; i++) {
+      const v = groups[i] * elementsInArea[i];
+      sumOfElements += v;
+    }
+    const meanInArea = sumOfElements / allAreas;
+    return meanInArea;
+  }
+
+  static probabilitiesInArea(groups: number[], meanInArea: number): number[] {
+    let probabilitiesInArea: number[] = [];
+
+    // do not calculate probability for the last element
+    for (let i = 0; i < groups.length - 1; i++) {
+      const v = MyMath.probabilityDistribution(meanInArea, groups[i]);
+      probabilitiesInArea.push(v);
+    }
+
+    const sumOfProbabilities = probabilitiesInArea.reduce((a, b) => a + b);
+    const lastValue = (1 - sumOfProbabilities);
+    probabilitiesInArea = [...probabilitiesInArea, lastValue];
+    return probabilitiesInArea;
+  }
+
 }

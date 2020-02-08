@@ -1,86 +1,233 @@
-<p>module3 works!</p>
 <h1>Adam Dziomdziora</h1>
-<h3>TODO:</h3>
-<h4>miary rozproszenia klasyczne:</h4>
+
 <ul>
-    <li>odchylenie przeciętne</li>
-    <li>wariancja</li>
-    <li>odchylenie standardowe</li>
-    <li>odchylenie standardowe dla próby</li>
+  <s>
+    <li>miary rozproszenia klasyczne:</li>
+    <ul>
+      <li>odchylenie przeciętne</li>
+      <li>wariancja</li>
+      <li>odchylenie standardowe</li>
+      <li>odchylenie standardowe dla próby</li>
+    </ul>
+  </s>
+  <li>test zgodności Pearsona ( in progress )</li>
 </ul>
 
-<h4>test zgodności Pearsona</h4>
-
 <div class="my">
-    <h1>Miary klasyczne rozproszenia</h1>
-    <form (ngSubmit)="generate()">
-        <div class="row">
-            <div class="form-group col-4">
-                <label for="numbersToGenerateInput">Number of elements</label>
-                <input type="number" [(ngModel)]="NumbersToGenerate" min="1" class="form-control" name="numbersToGenerateInput" required>
-            </div>
+  <h1>Miary klasyczne rozproszenia</h1>
+  <form class="form">
+    <div class="row">
+      <div class="form-group col-4" hidden>
+        <label for="numbersToGenerateInput">Number of elements</label>
+        <input
+          type="number"
+          [(ngModel)]="NumbersToGenerate"
+          min="1"
+          class="form-control"
+          name="numbersToGenerateInput"
+          required
+        />
+      </div>
 
-            <div class="form-group col-4">
-                <label for="generatedNumbersInput">Generated numbers</label>
-                <textarea [value]="GeneratedNumbers" class="form-control min" name="generatedNumbersInput" readonly></textarea>
-            </div>
+      <div class="form-group col-4">
+        <label for="generatedNumbersInput">Generated numbers</label>
+        <textarea
+          [value]="GeneratedNumbers"
+          class="form-control min"
+          name="generatedNumbersInput"
+          readonly
+        ></textarea>
+      </div>
 
-            <div class="form-group col-4">
-                <label for="manuallyGeneratedNumbersInput">OR type manually elements here</label>
-                <textarea [(ngModel)]="ManuallyGeneratedNumbers" class="form-control min" name="manuallyGeneratedNumbersInput"> </textarea>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-6">
-
-                <label for="varianceInput">Variance</label>
-                <input type="number" [value]="ComputedVariance" class="form-control" name="varianceInput" readonly>
-            </div>
-
-            <div class="form-group col-6">
-                <label for="stdInput">Standard Deviation</label>
-                <input type="number" [value]="StandardDeviation" class="form-control" name="stdInput" readonly>
-            </div>
-
-        </div>
-        <div class="row">
-
-            <div class="form-group col-6">
-
-                <label for="varianceSampleInput">Variance Sample</label>
-                <input type="number" [value]="ComputedVarianceSample" class="form-control" name="varianceSampleInput" readonly>
-            </div>
-            <div class="form-group col-6">
-                <label for="stdSampleInput">Standard Deviation Sample</label>
-                <input type="number" [value]="StandardDeviationSample" class="form-control" name="stdSampleInput" readonly>
-            </div>
-        </div>
-        <div class="row">
-
-            <div class="form-group col-6">
-                <label for="meanStdInput">Mean absolute deviation</label>
-                <input type="number" [value]="MeanAbsoluteDeviation" class="form-control" name="meanStdInput" readonly>
-            </div>
-        </div>
-
-        <div class="row" hidden>
-            <div class="form-group col-12">
-                <label for="zIndexesInput">z-indexes</label>
-                <textarea [value]="ZIndexes" class="form-control min" name="zIndexesInput" readonly> </textarea>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-success" [disabled]="ShouldDisableSubmit">Submit</button>
-    </form>
-
-    <div>
-        <button (click)="drawChart()" hidden>Draw graph</button>
-        <div id="googleChartHereVelocity" style="width: 800px; height: 400px;">waiting for the input data...</div>
+      <div class="form-group col-4">
+        <label for="manuallyGeneratedNumbersInput"
+          >Type manually elements here (e.g. -5, 1, 8, 7, 2 )</label
+        >
+        <textarea
+          [(ngModel)]="ManuallyGeneratedNumbers"
+          class="form-control min"
+          name="manuallyGeneratedNumbersInput"
+        >
+        </textarea>
+      </div>
     </div>
 
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="varianceInput">Variance</label>
+        <input
+          type="number"
+          [value]="ComputedVariance"
+          class="form-control"
+          name="varianceInput"
+          readonly
+        />
+      </div>
 
-    <div class="terminal">
-        <pre>{{LearnCode}}</pre>
+      <div class="form-group col-6">
+        <label for="stdInput">Standard Deviation</label>
+        <input
+          type="number"
+          [value]="StandardDeviation"
+          class="form-control"
+          name="stdInput"
+          readonly
+        />
+      </div>
     </div>
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="varianceSampleInput">Variance Sample</label>
+        <input
+          type="number"
+          [value]="ComputedVarianceSample"
+          class="form-control"
+          name="varianceSampleInput"
+          readonly
+        />
+      </div>
+      <div class="form-group col-6">
+        <label for="stdSampleInput">Standard Deviation Sample</label>
+        <input
+          type="number"
+          [value]="StandardDeviationSample"
+          class="form-control"
+          name="stdSampleInput"
+          readonly
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="meanStdInput">Mean absolute deviation</label>
+        <input
+          type="number"
+          [value]="MeanAbsoluteDeviation"
+          class="form-control"
+          name="meanStdInput"
+          readonly
+        />
+      </div>
+    </div>
+
+    <div class="row" hidden>
+      <div class="form-group col-12">
+        <label for="zIndexesInput">z-indexes</label>
+        <textarea
+          [value]="ZIndexes"
+          class="form-control min"
+          name="zIndexesInput"
+          readonly
+        >
+        </textarea>
+      </div>
+    </div>
+
+    <!-- <button (click)="generate()"
+      class="btn btn-success"
+      [disabled]="ShouldDisableSubmit"
+    >
+      Generate random
+    </button> -->
+  </form>
+
+  <div>
+    <button (click)="drawChart()" hidden>Draw graph</button>
+    <div id="googleChartHereVelocity" style="width: 800px; height: 400px;">
+      waiting for the input data...
+    </div>
+  </div>
+
+  <h1>test zgodności Pearsona</h1>
+  <form class="form">
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="leftNumbersForPearson"
+          >przedziały klasowe (np. 0,1,2,3,4,5)</label
+        >
+        <textarea
+          [(ngModel)]="LeftPearsonValues"
+          class="form-control min"
+          name="leftNumbersForPearson"
+        >
+        </textarea>
+      </div>
+
+      <div class="form-group col-6">
+        <label for="rightNumbersForPearson"
+          >liczebność i-tego przedziału empirycznego (np. 22, 58, 65, 35, 10,
+          10)</label
+        >
+        <textarea
+          [(ngModel)]="RightPearsonValues"
+          class="form-control min"
+          name="rightNumbersForPearson"
+        >
+        </textarea>
+      </div>
+    </div>
+
+    <div class="row form-group ">
+      <label for="probabilitySelect">choose probability level</label>
+      <select
+        class="form-control min"
+        name="probabilitySelect"
+        required
+        [(ngModel)]="choosenValue"
+      >
+        <option *ngFor="let value of probabilitiesArray" [value]="value">
+          {{ value }}
+        </option>
+      </select>
+    </div>
+
+    <div class="row form-group ">
+      <button (click)="DoPearson()" class="btn btn-success min">
+        Pearson
+      </button>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-12">
+        <label for="probabilitiesInput"
+          >prawdopodobieństwo teoretyczne wystąpienia wartości należącej do
+          i-tego przedziału
+        </label>
+        <textarea
+          [value]="ProbabilitiesInArea"
+          class="form-control min"
+          name="probabilitiesInput"
+          readonly
+        >
+        </textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-6">
+        <label for="ChiSquareInput">Obliczone chi-square</label>
+        <input
+          type="number"
+          [value]="ChiSquare"
+          class="form-control"
+          name="ChiSquareInput"
+          readonly
+        />
+      </div>
+      <div class="form-group col-6">
+        <label for="ChiSquareFromTableInput">Chi-square a z tablic</label>
+        <input
+          type="number"
+          [value]="ChiSquareFromTable"
+          class="form-control"
+          name="ChiSquareFromTableInput"
+          readonly
+        />
+      </div>
+    </div>
+  </form>
+
+  <div class="terminal">
+    <pre>{{ LearnCode }}</pre>
+  </div>
 </div>
