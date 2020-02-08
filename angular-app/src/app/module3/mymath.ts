@@ -1,4 +1,6 @@
 export class MyMath {
+  static probabilities: number[] = [0.995, 0.975, 0.20, 0.10, 0.05, 0.025, 0.02, 0.01, 0.005, 0.002, 0.001];
+
   static median(array: number[]): number {
     array.sort((a, b) => {
       return a - b;
@@ -71,11 +73,8 @@ export class MyMath {
     return nv;
   }
 
-
   static chiSquareFromTable(degreeOfFreedom: number, probability: number): number {
-
-    const probabilities = [0.995, 0.975, 0.20, 0.10, 0.05, 0.025, 0.02, 0.01, 0.005, 0.002, 0.001];
-    const indexOfProbability = probabilities.lastIndexOf(probability);
+    const indexOfProbability = MyMath.probabilities.lastIndexOf(probability);
 
     const table = new Map<number, number[]>();
     table.set(1, [0.0000393, 0.000982, 1.642, 2.706, 3.841, 5.024, 5.41, 6.635, 7.879, 9.550, 10.828]);
@@ -111,10 +110,13 @@ export class MyMath {
     return result;
   }
 
-  static chiSquare(r: number, groupCounts: number[], groupProbabilities: number[]): number {
+  static chiSquare(groupCounts: number[], groupProbabilities: number[]): number {
+    if (groupCounts.length !== groupProbabilities.length) {
+      throw new Error('array sizes must be equal');
+    }
     let sum = 0;
     const total = groupCounts.reduce((a, b) => a + b);
-    for (let i = 0; i < r; i++) {
+    for (let i = 0; i < groupCounts.length; i++) {
       const v1 = groupCounts[i] - total * groupProbabilities[i];
       const v2 = Math.pow(v1, 2);
       const v3 = total * groupProbabilities[i];
