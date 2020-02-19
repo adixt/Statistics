@@ -6,36 +6,109 @@
     <li>test normalności Shapiro-Wilka,</li>
 </ul>
 
-<h1>[miary asymetrii]</h1>
+<div class="section">
+    <h1>[rozkład statystyki z próby]</h1>
 
-<p>...</p>
-
-<h1>Shapiro-Wilk test of normality</h1>
-
-<p>
-    Jakiś opis
-    - im wyższe p tym lepiej
-    - i wyższe w też lepiej
-</p>
-
-<div style="text-align: center;">
-    <img src="assets/img/shapiro-wilk.png" alt="">
+    <p>
+        In most populations, the parameters are unknown and must be estimated based on sample data.
+    </p>
 </div>
-
-<hr>
 
 <div style="display: flex;">
-    <div style="width: 50%;">
-        <label for="">Samples</label>
-        <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="calculateSw();drawSWHistogram();drawSWColumn();" style="width: 100%;"></textarea>
+    <div style="width: 30%; margin-right: 10px;">
+        <div class="section" style="position: sticky; top: 30px;">
+            <p>
+                Put the values in the box below to perform analyses:
+            </p>
+
+            <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="inputNumbers();" style="width: 100%;"></textarea>
+
+            <br>
+
+            <p>
+                Generate <input type="number" class="form-control" [(ngModel)]="randomValuesCount" style="width: 150px; display: inline-block;"> random values
+            </p>
+            <p>
+                with distribution:
+                <input type="radio" name="distribution" id="dist_uniform" [(ngModel)]="distribution" value="1" checked><label for="dist_uniform">Uniform</label>
+                <input type="radio" name="distribution" id="dist_normal" [(ngModel)]="distribution" value="2"><label for="dist_normal">Normal</label>
+            </p>
+
+            <input class="btn btn-info" type="submit" (click)="generateRandomNumbers();">
+        </div>
     </div>
-    <div style="width: 50%; padding: 10px;">
-        <!-- <p>x = {{ numberList }}</p> -->
-        <p><b>W = {{ sw.w }}</b></p>
-        <p><b>p = {{ sw.p }}</b></p>
-        <div id="googleChartSWHistogram" class="sw-graph">No data</div>
-        <div id="googleChartSWColumn" class="sw-graph">No data</div>
+    <div style="width: 70%;">
+        <div class="section">
+            <!-- <h1> [miary asymetrii]</h1> -->
+            <h1>Statistics of data distribution</h1>
+
+            <p>...</p>
+
+            <img src="assets/img/skews.jpeg" alt="">
+
+            <br>
+
+            <p>
+                Skewness (measure of asymmetry): <img src="assets/img/asymmetry-coefficient.svg" alt="" height="50px">
+            </p>
+
+            <br>
+
+            <p>
+                Kurtosis (measure of the "tailedness"): <img src="assets/img/kurtosis.svg" alt="" height="50px">
+            </p>
+
+            <br>
+            <img src="assets/img/moment-k.svg" alt="" height="70px">
+
+            <!-- <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="calculateAsymmetry();" style="width: 100%;"></textarea> -->
+            <!-- <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="inputNumbers();" style="width: 100%;"></textarea> -->
+            <p><b>Skewness A = {{ skewness }}</b></p>
+            <p><b>Kurtosis K = {{ kurtosis }}</b></p>
+            <p><b>mean(X) = {{ mean }}</b></p>
+
+            <cite>Ramsey, J., & Newton, H. (2002). The elements of statistics. Australia: Duxbury.</cite>
+        </div>
+
+        <div class="section">
+            <h1>Shapiro-Wilk test of normality</h1>
+
+            <p>
+                Jakiś opis
+                - im wyższe p tym lepiej
+                - i wyższe w też lepiej
+            </p>
+
+            <p>
+                H<sub>0</sub> - a variable is normally distributed in some population.
+            </p>
+
+            <div style="display: flex;">
+                <div style="width: 50%;">
+                    <img src="assets/img/shapiro-wilk.svg" alt="" height="100px">
+                </div>
+                <div style="width: 50%;">
+                    asdfasdf
+                </div>
+            </div>
+
+            <hr>
+
+            <div style="display: flex;">
+                <!-- <div style="width: 50%;">
+                    <label for="">Samples</label>
+                    <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="calculateSw();drawSWHistogram();drawSWColumn();" style="width: 100%;"></textarea>
+                </div> -->
+                <div style="width: 100%; padding: 10px;">
+                    <!-- <p>x = {{ numberList }}</p> -->
+                    <p><b>W = {{ sw.w }}</b></p>
+                    <p><b>p = {{ sw.p }}</b></p>
+                    <div id="googleChartSWHistogram" class="sw-graph">No data</div>
+                    <div id="googleChartSWColumn" class="sw-graph">No data</div>
+                </div>
+            </div>
+
+            <cite>S. S. SHAPIRO, M. B. WILK, An analysis of variance test for normality (complete samples), Biometrika, Volume 52, Issue 3-4, December 1965, Pages 591–611, <a href="https://doi.org/10.1093/biomet/52.3-4.591" target="_blank">https://doi.org/10.1093/biomet/52.3-4.591</a></cite>
+        </div>
     </div>
 </div>
-
-<cite>S. S. SHAPIRO, M. B. WILK, An analysis of variance test for normality (complete samples), Biometrika, Volume 52, Issue 3-4, December 1965, Pages 591–611, <a href="https://doi.org/10.1093/biomet/52.3-4.591" target="_blank">https://doi.org/10.1093/biomet/52.3-4.591</a></cite>
