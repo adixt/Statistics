@@ -30,7 +30,7 @@ export class Statistics {
             }
         }
 
-        return maxCountKey;
+        return parseFloat(maxCountKey);
     }
 
     static moment(arr: number[], degree: number) {
