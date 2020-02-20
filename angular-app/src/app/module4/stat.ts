@@ -10,8 +10,7 @@ export class Statistics {
     }
 
     static mode(arr: number[]) {
-        // Not working
-        var counts = [];
+        var counts = {};
 
         for (var i = 0; i < arr.length; i++) {
             if (!(arr[i] in counts)) {
@@ -21,11 +20,17 @@ export class Statistics {
             counts[arr[i]]++;
         }
 
-        console.log(counts.sort());
+        var maxCountKey = '';
 
-        // return Object.keys(arr).find(key => arr[key] === );
+        for (var key in counts) {
+            var value = counts[key];
 
-        return arr.filter(function(a){return a}).sort();
+            if (!counts[maxCountKey] || value > counts[maxCountKey]) {
+                maxCountKey = key;
+            }
+        }
+
+        return maxCountKey;
     }
 
     static moment(arr: number[], degree: number) {

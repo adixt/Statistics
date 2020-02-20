@@ -6,14 +6,6 @@
     <li>test normalności Shapiro-Wilka,</li>
 </ul>
 
-<div class="section">
-    <h1>[rozkład statystyki z próby]</h1>
-
-    <p>
-        In most populations, the parameters are unknown and must be estimated based on sample data.
-    </p>
-</div>
-
 <div style="display: flex;">
     <div style="width: 30%; margin-right: 10px;">
         <div class="section" style="position: sticky; top: 30px;">
@@ -33,8 +25,12 @@
                 <input type="radio" name="distribution" id="dist_uniform" [(ngModel)]="distribution" value="1" checked><label for="dist_uniform">Uniform</label>
                 <input type="radio" name="distribution" id="dist_normal" [(ngModel)]="distribution" value="2"><label for="dist_normal">Normal</label>
             </p>
+            <p>
+                with bias:
+                <input type="number" [(ngModel)]="bias">
+            </p>
 
-            <input class="btn btn-info" type="submit" (click)="generateRandomNumbers();">
+            <input class="btn btn-primary" type="submit" (click)="generateRandomNumbers();">
         </div>
     </div>
     <div style="width: 70%;">
@@ -61,13 +57,32 @@
             <br>
             <img src="assets/img/moment-k.svg" alt="" height="70px">
 
-            <!-- <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="calculateAsymmetry();" style="width: 100%;"></textarea> -->
-            <!-- <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="inputNumbers();" style="width: 100%;"></textarea> -->
             <p><b>Skewness A = {{ skewness }}</b></p>
             <p><b>Kurtosis K = {{ kurtosis }}</b></p>
             <p><b>mean(X) = {{ mean }}</b></p>
+            <p><b>median(X) = {{ median }}</b></p>
+            <p><b>mode(X) = {{ mode }}</b></p>
 
             <cite>Ramsey, J., & Newton, H. (2002). The elements of statistics. Australia: Duxbury.</cite>
+        </div>
+
+        <div class="section">
+            <h1>Sampling distribution</h1>
+
+            <p>
+                In most populations, the parameters are unknown and must be estimated based on sample data.
+            </p>
+
+            Sample size
+            n = <input type="number" [(ngModel)]="sampleSize">
+
+            Number of samples
+            k = <input type="number" [(ngModel)]="sampleNumber">
+
+            <input class="btn btn-primary" type="submit" (click)="calculateSamplingDistributionForMean();">
+
+            <div id="googleChartSampleMean" class="sw-graph">No data</div>
+            <div id="googleChartSampleMedian" class="sw-graph">No data</div>
         </div>
 
         <div class="section">
@@ -77,6 +92,7 @@
                 Jakiś opis
                 - im wyższe p tym lepiej
                 - i wyższe w też lepiej
+                if p < 0.05: reject the null hypothesis
             </p>
 
             <p>
@@ -100,9 +116,8 @@
                     <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="calculateSw();drawSWHistogram();drawSWColumn();" style="width: 100%;"></textarea>
                 </div> -->
                 <div style="width: 100%; padding: 10px;">
-                    <!-- <p>x = {{ numberList }}</p> -->
                     <p><b>W = {{ sw.w }}</b></p>
-                    <p><b>p = {{ sw.p }}</b></p>
+                    <p [ngClass]="sw.p <= 0.05 ? 'red': ''"><b>p = {{ sw.p }}</b></p>
                     <div id="googleChartSWHistogram" class="sw-graph">No data</div>
                     <div id="googleChartSWColumn" class="sw-graph">No data</div>
                 </div>

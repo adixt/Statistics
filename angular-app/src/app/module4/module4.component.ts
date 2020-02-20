@@ -15,6 +15,8 @@ export class Module4Component implements OnInit {
     skewness: Number = 0;
     kurtosis: Number = 0;
     mean: Number = 0;
+    median: number = 0;
+    mode: number = 0;
 
     sw: ShapiroWilk;
     numbers: string;
@@ -22,6 +24,10 @@ export class Module4Component implements OnInit {
 
     randomValuesCount: number = 1;
     distribution: string = "1";
+    bias: number = 1;
+
+    sampleSize: number = 30;
+    sampleNumber: number = 50;
 
     constructor() {
         this.stat = new Statistics();
@@ -36,13 +42,16 @@ export class Module4Component implements OnInit {
     generateRandomNumbers() {
         this.numbers = '';
 
+
         if (this.distribution === '1') {
             for (var i = 0; i < this.randomValuesCount; i++) {
-                this.numbers += ((Math.random() - 0.5) + ' ');
+                this.numbers += ((Math.random() - 0.5 + this.bias) + ' ');
+                // this.numbers += (Math.floor(100*(Math.random() - 0.5) + this.bias)/100 + ' ');
             }
         } else if (this.distribution === '2') {
             for (var i = 0; i < this.randomValuesCount; i++) {
-                this.numbers += (Statistics.random_normal() + ' ');
+                this.numbers += ((Statistics.random_normal() + this.bias) + ' ');
+                // this.numbers += ((Math.floor(100*Statistics.random_normal()) + this.bias)/100 + ' ');
             }
         }
 
@@ -60,18 +69,58 @@ export class Module4Component implements OnInit {
         var values = this.stringToFloatList(this.numbers);
 
         this.mean = Statistics.mean(values);
+        this.median = Statistics.median(values);
+        this.mode = Statistics.mode(values);
         this.skewness = Statistics.skewness(values);
         this.kurtosis = Statistics.kurtosis(values);
     }
 
-    calculateSw(): void {
-        this.numberList = this.numbers.split(/[\s,\\n]+/).filter(function (el) {
-            return el != null && el != '';
-        }).map(function (x) {
-            return parseFloat(x);
-        });
+    calculateSamplingDistributionForMean() {
+        var distributionMeans = [];
+        var distributionMedians = [];
+        var numberListLen = this.numberList.length;
+        var tmpElements;
 
-        this.sw = Normality.shapiroWilk(new Vector(this.numberList))
+        for (var k = 0; k < this.sampleNumber; k++) {
+            tmpElements = [];
+
+            for (var n = 0; n < this.sampleSize; n++) {
+                tmpElements.push(this.numberList[Math.floor(Math.random() * numberListLen)]);
+            }
+
+            distributionMeans.push(['', Statistics.mean(tmpElements)]);
+            distributionMedians.push(['', Statistics.median(tmpElements)]);
+        }
+
+        distributionMeans.unshift(['Value', 'Occ.']);
+        distributionMedians.unshift(['Value', 'Occ.']);
+
+        var chartMeans = new google.visualization.Histogram(document.getElementById('googleChartSampleMean'));
+
+        chartMeans.draw(
+            google.visualization.arrayToDataTable(distributionMeans),
+            {
+                title: 'Sampling distribution for the sample mean',
+                legend: { position: 'none' },
+            }
+        );
+
+        var chartMedians = new google.visualization.Histogram(document.getElementById('googleChartSampleMedian'));
+
+        chartMedians.draw(
+            google.visualization.arrayToDataTable(distributionMedians),
+            {
+                title: 'Sampling distribution for the sample median',
+                legend: { position: 'none' },
+            }
+        );
+    }
+
+    calculateSw(): void {
+        this.numberList = this.stringToFloatList(this.numbers);
+
+        this.sw = Normality.shapiroWilk(new Vector(this.numberList));
+        this.sw.p = Math.abs(this.sw.p);
     }
 
     stringToFloatList(str) {
