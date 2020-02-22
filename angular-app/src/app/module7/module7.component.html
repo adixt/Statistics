@@ -8,7 +8,7 @@
 
 <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
     <div style="width: 60vw;" class="jumbotron">
-        <h2>dystrybuanta</h2>
+        <h2>Dystrybuanta</h2>
         Dystrybuantę zmiennej losowej definiuje sie jako:
         <br>
         <img src="assets/img/dystrybuanta.svg" alt="" style="height: 3em;">
@@ -23,7 +23,7 @@
         cumulative distribution function.
     </div>
     <div style="width:60vw;" class="jumbotron">
-        <h2>współczynnik zmienności</h2>
+        <h2>Współczynnik zmienności</h2>
         Współczynnik zmienności pozwala na porównanie zmienności cechy w róznych rozkładach, dzięki swojemu względnemu
         charakterowi.
         <br>
@@ -49,9 +49,13 @@
         <span *ngIf="variation1==variation2"> równa</span>
         zmienności próby B
         <div id="plotlyChart" style="width:100%"></div>
+        <div style="display: flex;justify-content: center;align-items: center">
+            <input class="btn btn-primary" style="margin-top: 0.3em;" type="submit" (click)="showDistribution();"
+                value="Odśwież przykład">
+        </div>
     </div>
     <div style="width: 60vw;" class="jumbotron">
-        <h2>hipoteza statystyczna & hipoteza sprawdzana</h2>
+        <h2>Hipoteza statystyczna & hipoteza sprawdzana</h2>
         Hipoteza statystyczna to osąd wydany na temat populacji bez przeprowadzenia jej wyczerpującego badania.
     </div>
 </div>
