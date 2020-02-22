@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+declare var google: any;
 
 @Component({
   selector: 'app-module7',
@@ -16,8 +16,6 @@ export class Module7Component implements OnInit {
   mean2: number;
   stddev2: number;
   variation2: number;
-
-  google: any;
 
   static mean(a: number[]): number {
     return a.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / a.length;
@@ -54,22 +52,22 @@ export class Module7Component implements OnInit {
   }
 
   drawDistributions() {
-    const data1 = this.google.visualization.DataTable();
-    data1.addColumn('idx');
-    data1.addColumn('number');
-    data1.addRows(this.distribution1.map((val, idx) => [idx, val]))
-    const chart1 = new this.google.visualization.LineChart(document.getElementById('googleChartA'));
+    const data1 = google.visualization.DataTable();
+    data1.addColumn('number', 'idx');
+    data1.addColumn('number', 'val');
+    data1.addRows(this.distribution1.map((val, idx) => [idx, val]));
+    const chart1 = new google.visualization.LineChart(document.getElementById('googleChartA'));
     const options1 = {
       title: 'Próba A',
       legend: { position: 'none' },
     };
     chart1.draw(data1, options1);
 
-    const data2 = this.google.visualization.DataTable();
-    data1.addColumn('idx');
-    data1.addColumn('number');
-    data1.addRows(this.distribution2.map((val, idx) => [idx, val]))
-    const chart2 = new this.google.visualization.LineChart(document.getElementById('googleChartB'));
+    const data2 = google.visualization.DataTable();
+    data2.addColumn('number', 'idx');
+    data2.addColumn('number', 'val');
+    data2.addRows(this.distribution2.map((val, idx) => [idx, val]));
+    const chart2 = new google.visualization.LineChart(document.getElementById('googleChartB'));
     const options2 = {
       title: 'Próba B',
       legend: { position: 'none' },
@@ -77,7 +75,7 @@ export class Module7Component implements OnInit {
     chart2.draw(data2, options2);
   }
 
-  constructor() {
+  ngOnInit() {
     this.distribution1 = Module7Component.normalArray(1000).sort();
     this.mean1 = Module7Component.mean(this.distribution1);
     this.stddev1 = Module7Component.stddev(this.distribution1);
@@ -87,11 +85,9 @@ export class Module7Component implements OnInit {
     this.mean2 = Module7Component.mean(this.distribution2);
     this.stddev2 = Module7Component.stddev(this.distribution2);
     this.variation2 = Module7Component.variation(this.distribution2);
-  }
-
-  ngOnInit() {
-    this.google.charts.load('current', { packages: ['corechart'] });
-    this.google.charts.setOnLoadCallback(() => this.drawDistributions);
+    // tslint:disable-next-line: object-literal-key-quotes
+    google.charts.load('current', { packages: ['corechart', 'line'] });
+    google.charts.setOnLoadCallback(() => this.drawDistributions);
     this.drawDistributions();
   }
 }
