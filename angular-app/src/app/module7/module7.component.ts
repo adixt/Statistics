@@ -8,7 +8,6 @@ declare var Plotly: any;
   styleUrls: ['./module7.component.scss']
 })
 export class Module7Component implements OnInit {
-  multiplier = 10;
   distribution1: number[];
   mean1: number;
   stddev1: number;
@@ -102,11 +101,6 @@ export class Module7Component implements OnInit {
         color: '#1f77b4',
         width: 1
       },
-      xbins: {
-        end: 1,
-        size: 0.1,
-        start: 0
-      },
       showlegend: false
     };
     const trace2h = {
@@ -120,11 +114,6 @@ export class Module7Component implements OnInit {
         color: '#ff7f0e',
         width: 1
       },
-      // xbins: {
-      //   end: 1 * this.multiplier,
-      //   size: 0.2 * this.multiplier,
-      //   start: 0
-      // },
       showlegend: false
     };
     const data = [trace1, trace2, trace1h, trace2h];
@@ -162,12 +151,17 @@ export class Module7Component implements OnInit {
 
   private showDistribution() {
     const arrLen = 1000;
-    this.multiplier = Module7Component.random(0.5, 2);
-    this.distribution1 = Module7Component.gaussianArray(arrLen);
+
+    let multiplier = Module7Component.random(0.5, 2);
+
+    this.distribution1 = Module7Component.normalArray(arrLen, 0, 1 * multiplier, Module7Component.random(-3, 3));
     this.mean1 = Module7Component.mean(this.distribution1);
     this.stddev1 = Module7Component.stddev(this.distribution1);
     this.variation1 = Module7Component.variation(this.distribution1);
-    this.distribution2 = Module7Component.normalArray(arrLen, 0, 1 * this.multiplier, Module7Component.random(-3, 3));
+
+    multiplier = Module7Component.random(0.5, 2);
+
+    this.distribution2 = Module7Component.normalArray(arrLen, 0, 1 * multiplier, Module7Component.random(-3, 3));
     this.mean2 = Module7Component.mean(this.distribution2);
     this.stddev2 = Module7Component.stddev(this.distribution2);
     this.variation2 = Module7Component.variation(this.distribution2);
