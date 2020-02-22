@@ -7,7 +7,7 @@
 </ul>
 
 <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
-    <div style="width: 80vw;" class="jumbotron">
+    <div style="width: 60vw;" class="jumbotron">
         <h2>dystrybuanta</h2>
         Dystrybuantę zmiennej losowej definiuje sie jako:
         <br>
@@ -22,7 +22,7 @@
         Funkcja ta musi być prawostronnie ciągła i niemalejąca. W języku angielskim określana jest jako CDF lub
         cumulative distribution function.
     </div>
-    <div style="width: 80vw;" class="jumbotron">
+    <div style="width:60vw;" class="jumbotron">
         <h2>współczynnik zmienności</h2>
         Współczynnik zmienności pozwala na porównanie zmienności cechy w róznych rozkładach, dzięki swojemu względnemu
         charakterowi.
@@ -37,11 +37,12 @@
         <br>
         Przykład:
         <br>
-        Próba A: σ = {{ stddev1 | number : '1.2' }} μ = {{ mean1 | number : '1.2' }} -> zmienność: {{ variation1 | number : '1.2' }}
-        <div id="googleChartA" class="sw-graph">No data</div>
+        Próba A: σ = {{ stddev1 | number : '1.2' }} μ = {{ mean1 | number : '1.2' }} -> zmienność:
+        {{ variation1 | number : '1.2' }}
         <br>
-        Próba B: σ = {{ stddev2 | number : '1.2' }} μ = {{ mean2 | number : '1.2' }} -> zmienność: {{ variation2 | number : '1.2' }}
-        <div id="googleChartB" class="sw-graph">No data</div>
+        Próba B: σ = {{ stddev2 | number : '1.2' }} μ = {{ mean2 | number : '1.2' }} -> zmienność:
+        {{ variation2 | number : '1.2' }}
+        <div id="plotlyChart" style="width:100%"></div>
         <br>
         Zmienność próby A jest
         <span *ngIf="variation1>variation2"> większa od</span>
@@ -49,7 +50,7 @@
         <span *ngIf="variation1==variation2"> równa</span>
         zmienności próby B
     </div>
-    <div style="width: 80vw;" class="jumbotron">
+    <div style="width: 60vw;" class="jumbotron">
         <h2>hipoteza statystyczna & hipoteza sprawdzana</h2>
         Hipoteza statystyczna to osąd wydany na temat populacji bez przeprowadzenia jej wyczerpującego badania.
     </div>

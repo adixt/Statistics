@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
+declare var Plotly: any;
 
 @Component({
   selector: 'app-module7',
@@ -52,27 +53,26 @@ export class Module7Component implements OnInit {
   }
 
   drawDistributions() {
-    const data1 = google.visualization.DataTable();
-    data1.addColumn('number', 'idx');
-    data1.addColumn('number', 'val');
-    data1.addRows(this.distribution1.map((val, idx) => [idx, val]));
-    const chart1 = new google.visualization.LineChart(document.getElementById('googleChartA'));
-    const options1 = {
-      title: 'Próba A',
-      legend: { position: 'none' },
+    const trace1 = {
+      x: this.distribution1.map((val, idx) => idx),
+      y: this.distribution1,
+      mode: 'lines',
+      name: 'Distribution A'
     };
-    chart1.draw(data1, options1);
-
-    const data2 = google.visualization.DataTable();
-    data2.addColumn('number', 'idx');
-    data2.addColumn('number', 'val');
-    data2.addRows(this.distribution2.map((val, idx) => [idx, val]));
-    const chart2 = new google.visualization.LineChart(document.getElementById('googleChartB'));
-    const options2 = {
-      title: 'Próba B',
-      legend: { position: 'none' },
+    const trace2 = {
+      x: this.distribution2.map((val, idx) => idx),
+      y: this.distribution2,
+      mode: 'lines',
+      name: 'Distribution B'
     };
-    chart2.draw(data2, options2);
+    const data = [trace1, trace2];
+    const layout = {
+      title: 'A & B distributions',
+      plot_bgcolor: '#e9ecef',
+      paper_bgcolor:"#e9ecef"
+    };
+    const config = {responsive: true}
+    Plotly.newPlot(document.getElementById('plotlyChart'), data, layout, config);
   }
 
   ngOnInit() {
@@ -86,8 +86,6 @@ export class Module7Component implements OnInit {
     this.stddev2 = Module7Component.stddev(this.distribution2);
     this.variation2 = Module7Component.variation(this.distribution2);
     // tslint:disable-next-line: object-literal-key-quotes
-    google.charts.load('current', { packages: ['corechart', 'line'] });
-    google.charts.setOnLoadCallback(() => this.drawDistributions);
     this.drawDistributions();
   }
 }
