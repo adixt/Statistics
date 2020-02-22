@@ -42,13 +42,13 @@
         <br>
         Próba B: σ = {{ stddev2 | number : '1.2' }} μ = {{ mean2 | number : '1.2' }} -> zmienność:
         {{ variation2 | number : '1.2' }}
-        <div id="plotlyChart" style="width:100%"></div>
         <br>
         Zmienność próby A jest
         <span *ngIf="variation1>variation2"> większa od</span>
         <span *ngIf="variation1<variation2"> mniejsza od</span>
         <span *ngIf="variation1==variation2"> równa</span>
         zmienności próby B
+        <div id="plotlyChart" style="width:100%"></div>
     </div>
     <div style="width: 60vw;" class="jumbotron">
         <h2>hipoteza statystyczna & hipoteza sprawdzana</h2>
