@@ -149,7 +149,7 @@ export class Module7Component implements OnInit {
     this.showDistribution();
   }
 
-  private showDistribution() {
+  public showDistribution() {
     const arrLen = 1000;
 
     let multiplier = Module7Component.random(0.5, 2);
