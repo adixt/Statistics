@@ -7,15 +7,49 @@
 </ul>
 
 <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
-    <div style="width: 80vw;">
+    <div style="width: 80vw;" class="jumbotron">
         <h2>dystrybuanta</h2>
+        Dystrybuantę zmiennej losowej definiuje sie jako:
+        <br>
         <img src="assets/img/dystrybuanta.svg" alt="" style="height: 3em;">
+        <br>
+        jest to funkcja rzeczywista, zawierająca wszystkie informacje o opisywanym rozkładzie.
+        <br>
+        Własności dystybuanty:
+        <br>
+        <img src="assets/img/dystrybuanta_wlasnosci.svg" alt="" style="height: 5em;">
+        <br>
+        Funkcja ta musi być prawostronnie ciągła i niemalejąca. W języku angielskim określana jest jako CDF lub
+        cumulative distribution function.
     </div>
-    <div style="width: 80vw;">
+    <div style="width: 80vw;" class="jumbotron">
         <h2>współczynnik zmienności</h2>
-        <img src="assets/img/zmiennosc.svg" alt="" style="height: 3em;">
+        Współczynnik zmienności pozwala na porównanie zmienności cechy w róznych rozkładach, dzięki swojemu względnemu
+        charakterowi.
+        <br>
+        <img src="assets/img/zmiennosc.svg" alt="" style="height: 2.5em;">
+        <br>
+        gdzie:
+        <br>
+        σ - odchylenie standardowe z próby
+        <br>
+        μ - średnia arytmetyczna z próby (nie może być zerem)
+        <br>
+        Przykład:
+        <br>
+        Próba A: σ = {{ stddev1 | number : '1.2' }} μ = {{ mean1 | number : '1.2' }} -> zmienność: {{ variation1 | number : '1.2' }}
+        <div id="googleChartA" class="sw-graph">No data</div>
+        <br>
+        Próba B: σ = {{ stddev2 | number : '1.2' }} μ = {{ mean2 | number : '1.2' }} -> zmienność: {{ variation2 | number : '1.2' }}
+        <div id="googleChartB" class="sw-graph">No data</div>
+        <br>
+        Zmienność próby A jest
+        <span *ngIf="variation1>variation2"> większa od</span>
+        <span *ngIf="variation1<variation2"> mniejsza od</span>
+        <span *ngIf="variation1==variation2"> równa</span>
+        zmienności próby B
     </div>
-    <div style="width: 80vw;">
+    <div style="width: 80vw;" class="jumbotron">
         <h2>hipoteza statystyczna & hipoteza sprawdzana</h2>
     </div>
 </div>
