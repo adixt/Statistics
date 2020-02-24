@@ -17,6 +17,8 @@
 
             <br>
 
+            <p>OR</p>
+
             <p>
                 Generate <input type="number" class="form-control" [(ngModel)]="randomValuesCount" style="width: 150px; display: inline-block;"> random values
             </p>
@@ -27,7 +29,7 @@
             </p>
             <p>
                 with bias:
-                <input type="number" [(ngModel)]="bias">
+                <input type="number" class="form-control" style="width: 150px; display: inline-block;" [(ngModel)]="bias">
             </p>
 
             <input class="btn btn-primary" type="submit" (click)="generateRandomNumbers();">
@@ -35,33 +37,49 @@
     </div>
     <div style="width: 70%;">
         <div class="section">
-            <!-- <h1> [miary asymetrii]</h1> -->
             <h1>Statistics of data distribution</h1>
 
-            <p>...</p>
+            
 
-            <img src="assets/img/skews.jpeg" alt="">
+            <div style="display: flex;">
+                <div style="width: 40%;">
+                    
 
-            <br>
+                    <p><b>Skewness A = {{ skewness }}</b></p>
+                    <p><b>Kurtosis K = {{ kurtosis }}</b></p>
+                    
+                    <p>
+                        Skewness (measure of asymmetry): <img src="assets/img/asymmetry-coefficient.svg" alt="" height="50px">
+                    </p>
+                    
+                    <p>
+                        Kurtosis (measure of the "tailedness"): <img src="assets/img/kurtosis.svg" alt="" height="50px">
+                    </p>
 
-            <p>
-                Skewness (measure of asymmetry): <img src="assets/img/asymmetry-coefficient.svg" alt="" height="50px">
-            </p>
+                    where <img src="assets/img/moment-k.svg" alt="" height="70px">
+                    <br>
+                    and <img src="assets/img/std.svg" alt="" height="65px">
 
-            <br>
+                    <br><br>
 
-            <p>
-                Kurtosis (measure of the "tailedness"): <img src="assets/img/kurtosis.svg" alt="" height="50px">
-            </p>
+                    <p><b>mean(X) = {{ mean }}</b></p>
+                    <p><b>median(X) = {{ median }}</b></p>
+                    <p><b>mode(X) = {{ mode }}</b></p>
+                </div>
+                <div style="width: 60%;">
+                    <img src="assets/img/skews.jpeg" alt="" style="margin: 15px 0;">
 
-            <br>
-            <img src="assets/img/moment-k.svg" alt="" height="70px">
+                    <br>
 
-            <p><b>Skewness A = {{ skewness }}</b></p>
-            <p><b>Kurtosis K = {{ kurtosis }}</b></p>
-            <p><b>mean(X) = {{ mean }}</b></p>
-            <p><b>median(X) = {{ median }}</b></p>
-            <p><b>mode(X) = {{ mode }}</b></p>
+                    <p style="text-align: justify;">
+                        The skewness for a normal distribution is zero, and any symmetric data should have a skewness near zero. Negative values for the skewness indicate that the data is skewed left and positive values for the skewness indicate data that are skewed right. By skewed left, we mean that the left tail is long relative to the right tail and vice versa.
+                    </p>
+
+                    <p style="text-align: justify;">
+                        The kurtosis for a standard normal distribution is equal to 3. If the kurtosis is greater than 3, then the dataset has heavier tails than a normal distribution (more data in the tails). If the kurtosis is less than 3, then the dataset has lighter tails than a normal distribution (less in the tails).
+                    </p>
+                </div>
+            </div>
 
             <cite>Ramsey, J., & Newton, H. (2002). The elements of statistics. Australia: Duxbury.</cite>
         </div>
@@ -73,11 +91,15 @@
                 In most populations, the parameters are unknown and must be estimated based on sample data.
             </p>
 
+            <p>
+                A sampling distribution is a probability distribution of a variable obtained through repeated drawing of a large number of samples from a specific population. 
+            </p>
+
             Sample size
-            n = <input type="number" [(ngModel)]="sampleSize">
+            n = <input type="number" class="form-control" style="width: 150px; display: inline-block;" [(ngModel)]="sampleSize">
 
             Number of samples
-            k = <input type="number" [(ngModel)]="sampleNumber">
+            k = <input type="number" class="form-control" style="width: 150px; display: inline-block;" [(ngModel)]="sampleNumber">
 
             <input class="btn btn-primary" type="submit" (click)="calculateSamplingDistributionForMean();">
 
@@ -88,23 +110,22 @@
         <div class="section">
             <h1>Shapiro-Wilk test of normality</h1>
 
-            <p>
-                Jakiś opis
-                - im wyższe p tym lepiej
-                - i wyższe w też lepiej
-                if p < 0.05: reject the null hypothesis
-            </p>
-
-            <p>
-                H<sub>0</sub> - a variable is normally distributed in some population.
-            </p>
-
             <div style="display: flex;">
                 <div style="width: 50%;">
-                    <img src="assets/img/shapiro-wilk.svg" alt="" height="100px">
+                    <p><b>
+                        The Shapiro-Wilk test examines if a variable is normally distributed in a population.
+                    </b></p>
+
+                    <p>
+                        H<sub>0</sub> - a variable is normally distributed in some population
+                    </p>
+
+                    <p>
+                        If p < 0.05: reject the null hypothesis
+                    </p>
                 </div>
                 <div style="width: 50%;">
-                    asdfasdf
+                    <img src="assets/img/shapiro-wilk.svg" alt="" height="90px">
                 </div>
             </div>
 
