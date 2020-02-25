@@ -1,2 +1,80 @@
-<p>module7 works!</p>
 <h1>Piotr Łuczak</h1>
+
+<ul>
+    <li>dystrybuanta</li>
+    <li>miary rozproszenia względne: współczynnik zmienności</li>
+    <li>testowanie hipotez statystycznych: hipoteza statystyczna, hipoteza sprawdzana</li>
+</ul>
+
+<div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+    <div style="width: 60vw;" class="jumbotron text-justify">
+        <h2>Dystrybuanta</h2>
+        Dystrybuantę zmiennej losowej definiuje sie jako:
+        <br>
+        <img src="assets/img/dystrybuanta.svg" alt="" style="height: 3em;">
+        <br>
+        jest to funkcja rzeczywista, zawierająca wszystkie informacje o opisywanym rozkładzie.
+        <br>
+        Własności dystybuanty:
+        <br>
+        <img src="assets/img/dystrybuanta_wlasnosci.svg" alt="" style="height: 5em;">
+        <br>
+        Funkcja ta musi być prawostronnie ciągła i niemalejąca. W języku angielskim określana jest jako CDF lub
+        cumulative distribution function.
+    </div>
+    <div style="width:60vw;" class="jumbotron text-justify">
+        <h2>Współczynnik zmienności</h2>
+        Współczynnik zmienności pozwala na porównanie zmienności cechy w róznych rozkładach, dzięki swojemu względnemu
+        charakterowi.
+        <br>
+        <img src="assets/img/zmiennosc.svg" alt="" style="height: 2.5em;">
+        <br>
+        gdzie:
+        <br>
+        σ - odchylenie standardowe z próby
+        <br>
+        μ - średnia arytmetyczna z próby (nie może być zerem)
+        <br>
+        Przykład:
+        <br>
+        Próba A: σ = {{ stddev1 | number : '1.2' }} μ = {{ mean1 | number : '1.2' }} -> zmienność:
+        {{ variation1 | number : '1.2' }}
+        <br>
+        Próba B: σ = {{ stddev2 | number : '1.2' }} μ = {{ mean2 | number : '1.2' }} -> zmienność:
+        {{ variation2 | number : '1.2' }}
+        <br>
+        <b>Wynik porównania:</b>
+        <br>
+        Zmienność próby A jest
+        <b>
+            <span *ngIf="variation1>variation2"> większa od</span>
+            <span *ngIf="variation1<variation2"> mniejsza od</span>
+            <span *ngIf="variation1==variation2"> równa</span>
+        </b>
+        zmienności próby B
+        <div id="plotlyChart" style="width:100%"></div>
+        <div style="display: flex;justify-content: center;align-items: center">
+            <input class="btn btn-primary" style="margin-top: 0.3em;" type="submit" (click)="showDistribution();"
+                value="Odśwież przykład">
+        </div>
+    </div>
+    <div style="width: 60vw;" class="jumbotron text-justify">
+        <h2>Hipoteza statystyczna & hipoteza sprawdzana</h2>
+        Hipoteza statystyczna to osąd wydany na temat populacji bez przeprowadzenia jej wyczerpującego badania. 
+        Hipoteza ta może dotyczyć postaci funkcyjnej rozkładu populacji (nieparametryczne) lub też wartości jej parametrów (parametryczne).
+        <br>
+        Hipoteza zerowa to hipoteza zakładająca że różnica pomiędzy parametrami założonym a rzeczywistymi wynosi zero.
+        <br>
+        Hipoteza alternatywna jest hipoteza przewstawną do weryfikowanej, tj. zakłada isnienie różnicy pomiędzy parametrami założonymi a rzeczywistymi.
+        <br>
+        Test statystyczny ma na celu zweryfikowanie hipotezy zerowej na podstawie posidanej próby.
+        Test ten polega na zweryfikowaniu czy wynik próby znajduje się w <b>obszarze krytycznym</b> pozwalającym na odrzucenie próby.
+        <br>
+        Błedy testu statystycznego:
+        <ul>
+            <li>1-go rodzaju: odrzucenie prawdziwej hipotezy</li>
+            <li>2-go rodzaju: przyjęcie fałszywej hipotezy</li>
+        </ul>
+        Ponieważ niemozliwe jest zminimalizowanie błędów obu typów na raz konieczne jest przyjęcie poziomu istotności (typowo 0.1, 0.05, 0.01) dla którego nastepuje odrzucenie hipotezy zerowej.
+    </div>
+</div>
