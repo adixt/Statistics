@@ -1,0 +1,5 @@
+npm i typescript@3.5.3
+npm install -g igniteui-cli 
+
+npm install --save igniteui-angular-core
+npm install --save igniteui-angular-excel

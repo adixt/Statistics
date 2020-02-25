@@ -12,4 +12,19 @@ export class Module1Component implements OnInit {
   ngOnInit() {
   }
 
+  /*set ManuallyGeneratedNumbers(value: string) {
+    const values = value
+      .split(/[\s,\\n]+/)
+      .filter((el) => {
+        return el != null && el !== '';
+      }).map((x) => {
+        return parseFloat(x);
+      });
+    this.CalculateStatisticValues();
+  }
+
+  CalculateStatisticValues() {
+   
+  }*/
+
 }
