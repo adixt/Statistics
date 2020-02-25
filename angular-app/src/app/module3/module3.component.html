@@ -1,16 +1,14 @@
 <h1>Adam Dziomdziora</h1>
 
 <ul>
-  <s>
-    <li>miary rozproszenia klasyczne:</li>
-    <ul>
-      <li>odchylenie przeciętne</li>
-      <li>wariancja</li>
-      <li>odchylenie standardowe</li>
-      <li>odchylenie standardowe dla próby</li>
-    </ul>
-  </s>
-  <li>test zgodności Pearsona ( in progress )</li>
+  <li>miary rozproszenia klasyczne: &#9989;</li>
+  <ul>
+    <li>odchylenie przeciętne &#9989;</li>
+    <li>wariancja &#9989;</li>
+    <li>odchylenie standardowe &#9989;</li>
+    <li>odchylenie standardowe dla próby &#9989;</li>
+  </ul>
+  <li>test zgodności Pearsona &#9989;</li>
 </ul>
 
 <div class="my">
@@ -18,7 +16,9 @@
   <form class="form">
     <div class="row">
       <div class="form-group col-4" hidden>
-        <label for="numbersToGenerateInput">Number of elements</label>
+        <label for="numbersToGenerateInput"
+          >Wprowadź liczbę losowych elementów</label
+        >
         <input
           type="number"
           [(ngModel)]="NumbersToGenerate"
@@ -29,8 +29,8 @@
         />
       </div>
 
-      <div class="form-group col-4">
-        <label for="generatedNumbersInput">Generated numbers</label>
+      <div class="form-group col-6">
+        <label for="generatedNumbersInput">Posortowane dane</label>
         <textarea
           [value]="GeneratedNumbers"
           class="form-control min"
@@ -39,9 +39,9 @@
         ></textarea>
       </div>
 
-      <div class="form-group col-4">
+      <div class="form-group col-6">
         <label for="manuallyGeneratedNumbersInput"
-          >Type manually elements here (e.g. -5, 1, 8, 7, 2 )</label
+          >Wprowadź dane (np. -5, 1, 8, 7, 2 )</label
         >
         <textarea
           [(ngModel)]="ManuallyGeneratedNumbers"
@@ -54,7 +54,7 @@
 
     <div class="row">
       <div class="form-group col-6">
-        <label for="varianceInput">Variance</label>
+        <label for="varianceInput">Wariancja</label>
         <input
           type="number"
           [value]="ComputedVariance"
@@ -65,7 +65,7 @@
       </div>
 
       <div class="form-group col-6">
-        <label for="stdInput">Standard Deviation</label>
+        <label for="stdInput">Odchylenie standardowe</label>
         <input
           type="number"
           [value]="StandardDeviation"
@@ -77,7 +77,7 @@
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label for="varianceSampleInput">Variance Sample</label>
+        <label for="varianceSampleInput">Wariancja dla próby</label>
         <input
           type="number"
           [value]="ComputedVarianceSample"
@@ -87,7 +87,7 @@
         />
       </div>
       <div class="form-group col-6">
-        <label for="stdSampleInput">Standard Deviation Sample</label>
+        <label for="stdSampleInput">Odchylenie standardowe dla próby</label>
         <input
           type="number"
           [value]="StandardDeviationSample"
@@ -99,7 +99,7 @@
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label for="meanStdInput">Mean absolute deviation</label>
+        <label for="meanStdInput">Odchylenie przeciętne</label>
         <input
           type="number"
           [value]="MeanAbsoluteDeviation"
@@ -167,24 +167,29 @@
       </div>
     </div>
 
-    <div class="row form-group ">
-      <label for="probabilitySelect">choose probability level</label>
-      <select
-        class="form-control min"
-        name="probabilitySelect"
-        required
-        [(ngModel)]="choosenValue"
-      >
-        <option *ngFor="let value of probabilitiesArray" [value]="value">
-          {{ value }}
-        </option>
-      </select>
+    <div class="row">
+      <div class="form-group col-12">
+        <label for="probabilitySelect">Poziom istnotności</label>
+        <select
+          class="form-control min"
+          name="probabilitySelect"
+          required
+          [(ngModel)]="choosenValue"
+          (change)="DoPearsonIfRequired()"
+        >
+          <option *ngFor="let value of probabilitiesArray" [value]="value">
+            {{ value }}
+          </option>
+        </select>
+      </div>
     </div>
 
-    <div class="row form-group ">
-      <button (click)="DoPearson()" class="btn btn-success min">
-        Pearson
-      </button>
+    <div class="row">
+      <div class="form-group col-12">
+        <button (click)="DoPearsonIfRequired()" class="btn btn-success min">
+          Testuj Pearson'a
+        </button>
+      </div>
     </div>
 
     <div class="row">
@@ -215,7 +220,7 @@
         />
       </div>
       <div class="form-group col-6">
-        <label for="ChiSquareFromTableInput">Chi-square a z tablic</label>
+        <label for="ChiSquareFromTableInput">Chi-square z tablic</label>
         <input
           type="number"
           [value]="ChiSquareFromTable"
@@ -225,9 +230,38 @@
         />
       </div>
     </div>
+
+    <div class="row">
+      <div class="form-group col-12">
+        <label for="responsePearsonInput"
+          >Przy założonym poziomie istotności
+          <u>
+            <b>{{ choosenValue }}</b> </u
+          >, chi-square <b>{{ ChiSquare }}</b> i chi-square z tablic
+          <b>{{ ChiSquareFromTable }}</b>
+        </label>
+        <textarea
+          [value]="ResponsePearson"
+          [className]="
+            CanHyphotesisByRejected
+              ? 'rejected form-control min'
+              : 'notRejected form-control min'
+          "
+          name="responsePearsonInput"
+          readonly
+        >
+        </textarea>
+      </div>
+    </div>
   </form>
 
-  <div class="terminal">
-    <pre>{{ LearnCode }}</pre>
+  <div class="row">
+    <div class="terminal" >
+      <pre>{{ LearnCode }}</pre>
+    </div>
+    <div class="terminal">
+      <pre>{{ LearnCode2 }}</pre>
+    </div>
   </div>
+
 </div>

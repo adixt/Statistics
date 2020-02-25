@@ -36,6 +36,26 @@ export class Module3Component implements OnInit {
   private numbersMeanAbsoluteDeviation = 0;
 
 
+  get CanHyphotesisByRejected(): boolean {
+    return this.chiSquare >= this.chiSquareFromTable;
+  }
+
+  get ResponsePearson(): string {
+    if (this.groupsForPearson.length === 0 || this.elementsInAreaForPearson.length === 0) {
+      return 'Uzupełnij najpierw przedziały klasowe i liczebnośc populacji.';
+    }
+
+    if (this.chiSquare === 0 || this.chiSquareFromTable === 0) {
+      this.doPearson();
+    }
+
+    if (this.chiSquare > this.chiSquareFromTable) {
+      return 'można odrzucić Hipotezę H0';
+    } else {
+      return 'Nie można odrzucić Hipotezy H0';
+    }
+  }
+
   get ChiSquare(): number {
     return parseFloat(this.chiSquare.toFixed(3));
   }
@@ -65,7 +85,14 @@ export class Module3Component implements OnInit {
     this.elementsInAreaForPearson = values;
   }
 
-  DoPearson() {
+  DoPearsonIfRequired() {
+    if (this.groupsForPearson.length !== 0
+      && this.elementsInAreaForPearson.length !== 0) {
+      this.doPearson();
+    }
+  }
+
+  private doPearson() {
     this.meanInArea = MyMath.meanInArea(this.groupsForPearson, this.elementsInAreaForPearson);
     this.probabilitiesInArea = MyMath.probabilitiesInArea(this.groupsForPearson, this.meanInArea);
     this.chiSquare = MyMath.chiSquare(this.elementsInAreaForPearson, this.probabilitiesInArea);
@@ -81,11 +108,15 @@ export class Module3Component implements OnInit {
       text = `Na poziomie istotności ${prob} nie mozemy odrzucić hipotezy H0,
       że jest to rozkład Poissona `;
     }
-    debugger;
   }
 
   get LearnCode(): string {
     const codes = Learn.Codes;
+    return codes;
+  }
+
+  get LearnCode2(): string {
+    const codes = Learn.Codes2;
     return codes;
   }
 

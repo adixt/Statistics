@@ -91,7 +91,6 @@ export class MyMath {
     const arr = table.get(degreeOfFreedom);
     const chi = arr[indexOfProbability];
     return chi;
-
   }
 
   static factorial(x: number): number {

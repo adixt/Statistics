@@ -6,36 +6,145 @@
     <li>test normalności Shapiro-Wilka,</li>
 </ul>
 
-<h1>[miary asymetrii]</h1>
-
-<p>...</p>
-
-<h1>Shapiro-Wilk test of normality</h1>
-
-<p>
-    Jakiś opis
-    - im wyższe p tym lepiej
-    - i wyższe w też lepiej
-</p>
-
-<div style="text-align: center;">
-    <img src="assets/img/shapiro-wilk.png" alt="">
-</div>
-
-<hr>
-
 <div style="display: flex;">
-    <div style="width: 50%;">
-        <label for="">Samples</label>
-        <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="calculateSw();drawSWHistogram();drawSWColumn();" style="width: 100%;"></textarea>
+    <div style="width: 30%; margin-right: 10px;">
+        <div class="section" style="position: sticky; top: 30px;">
+            <p>
+                Put the values in the box below to perform analyses:
+            </p>
+
+            <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="inputNumbers();" style="width: 100%;"></textarea>
+
+            <br>
+
+            <p>OR</p>
+
+            <p>
+                Generate <input type="number" class="form-control" [(ngModel)]="randomValuesCount" style="width: 150px; display: inline-block;"> random values
+            </p>
+            <p>
+                with distribution:
+                <input type="radio" name="distribution" id="dist_uniform" [(ngModel)]="distribution" value="1" checked><label for="dist_uniform">Uniform</label>
+                <input type="radio" name="distribution" id="dist_normal" [(ngModel)]="distribution" value="2"><label for="dist_normal">Normal</label>
+            </p>
+            <p>
+                with bias:
+                <input type="number" class="form-control" style="width: 150px; display: inline-block;" [(ngModel)]="bias">
+            </p>
+
+            <input class="btn btn-primary" type="submit" (click)="generateRandomNumbers();">
+        </div>
     </div>
-    <div style="width: 50%; padding: 10px;">
-        <!-- <p>x = {{ numberList }}</p> -->
-        <p><b>W = {{ sw.w }}</b></p>
-        <p><b>p = {{ sw.p }}</b></p>
-        <div id="googleChartSWHistogram" class="sw-graph">No data</div>
-        <div id="googleChartSWColumn" class="sw-graph">No data</div>
+    <div style="width: 70%;">
+        <div class="section">
+            <h1>Statistics of data distribution</h1>
+
+            
+
+            <div style="display: flex;">
+                <div style="width: 40%;">
+                    
+
+                    <p><b>Skewness A = {{ skewness }}</b></p>
+                    <p><b>Kurtosis K = {{ kurtosis }}</b></p>
+                    
+                    <p>
+                        Skewness (measure of asymmetry): <img src="assets/img/asymmetry-coefficient.svg" alt="" height="50px">
+                    </p>
+                    
+                    <p>
+                        Kurtosis (measure of the "tailedness"): <img src="assets/img/kurtosis.svg" alt="" height="50px">
+                    </p>
+
+                    where <img src="assets/img/moment-k.svg" alt="" height="70px">
+                    <br>
+                    and <img src="assets/img/std.svg" alt="" height="65px">
+
+                    <br><br>
+
+                    <p><b>mean(X) = {{ mean }}</b></p>
+                    <p><b>median(X) = {{ median }}</b></p>
+                    <p><b>mode(X) = {{ mode }}</b></p>
+                </div>
+                <div style="width: 60%;">
+                    <img src="assets/img/skews.jpeg" alt="" style="margin: 15px 0;">
+
+                    <br>
+
+                    <p style="text-align: justify;">
+                        The skewness for a normal distribution is zero, and any symmetric data should have a skewness near zero. Negative values for the skewness indicate that the data is skewed left and positive values for the skewness indicate data that are skewed right. By skewed left, we mean that the left tail is long relative to the right tail and vice versa.
+                    </p>
+
+                    <p style="text-align: justify;">
+                        The kurtosis for a standard normal distribution is equal to 3. If the kurtosis is greater than 3, then the dataset has heavier tails than a normal distribution (more data in the tails). If the kurtosis is less than 3, then the dataset has lighter tails than a normal distribution (less in the tails).
+                    </p>
+                </div>
+            </div>
+
+            <cite>Ramsey, J., & Newton, H. (2002). The elements of statistics. Australia: Duxbury.</cite>
+        </div>
+
+        <div class="section">
+            <h1>Sampling distribution</h1>
+
+            <p>
+                In most populations, the parameters are unknown and must be estimated based on sample data.
+            </p>
+
+            <p>
+                A sampling distribution is a probability distribution of a variable obtained through repeated drawing of a large number of samples from a specific population. 
+            </p>
+
+            Sample size
+            n = <input type="number" class="form-control" style="width: 150px; display: inline-block;" [(ngModel)]="sampleSize">
+
+            Number of samples
+            k = <input type="number" class="form-control" style="width: 150px; display: inline-block;" [(ngModel)]="sampleNumber">
+
+            <input class="btn btn-primary" type="submit" (click)="calculateSamplingDistributionForMean();">
+
+            <div id="googleChartSampleMean" class="sw-graph">No data</div>
+            <div id="googleChartSampleMedian" class="sw-graph">No data</div>
+        </div>
+
+        <div class="section">
+            <h1>Shapiro-Wilk test of normality</h1>
+
+            <div style="display: flex;">
+                <div style="width: 50%;">
+                    <p><b>
+                        The Shapiro-Wilk test examines if a variable is normally distributed in a population.
+                    </b></p>
+
+                    <p>
+                        H<sub>0</sub> - a variable is normally distributed in some population
+                    </p>
+
+                    <p>
+                        If p < 0.05: reject the null hypothesis
+                    </p>
+                </div>
+                <div style="width: 50%;">
+                    <img src="assets/img/shapiro-wilk.svg" alt="" height="90px">
+                </div>
+            </div>
+
+            <hr>
+
+            <div style="display: flex;">
+                <!-- <div style="width: 50%;">
+                    <label for="">Samples</label>
+                    <textarea rows="10" class="form-control" placeholder="Values..." [(ngModel)]="numbers" (keyup)="calculateSw();drawSWHistogram();drawSWColumn();" style="width: 100%;"></textarea>
+                </div> -->
+                <div style="width: 100%; padding: 10px;">
+                    <p><b>W = {{ sw.w }}</b></p>
+                    <p [ngClass]="sw.p <= 0.05 ? 'red': ''"><b>p = {{ sw.p }}</b></p>
+                    <div id="googleChartSWHistogram" class="sw-graph">No data</div>
+                    <div id="googleChartSWColumn" class="sw-graph">No data</div>
+                </div>
+            </div>
+
+            <cite>S. S. SHAPIRO, M. B. WILK, An analysis of variance test for normality (complete samples), Biometrika, Volume 52, Issue 3-4, December 1965, Pages 591–611, <a href="https://doi.org/10.1093/biomet/52.3-4.591" target="_blank">https://doi.org/10.1093/biomet/52.3-4.591</a></cite>
+        </div>
     </div>
 </div>
-
-<cite>S. S. SHAPIRO, M. B. WILK, An analysis of variance test for normality (complete samples), Biometrika, Volume 52, Issue 3-4, December 1965, Pages 591–611, <a href="https://doi.org/10.1093/biomet/52.3-4.591" target="_blank">https://doi.org/10.1093/biomet/52.3-4.591</a></cite>
