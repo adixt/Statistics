@@ -1,2 +1,191 @@
 <p>module1 works!:)</p>
 <h1>Monika Bartczak</h1>
+<h2>PRACE W TOKU</h2>
+<ul>
+    <li>Miary średnie: </li>
+    <ul>
+      <li>średnie klasyczne: arytmetyczna, harmoniczna, geometryczna, </li>
+      <li>średnie pozycyjne: dominanta, kwantyle, </li>
+    </ul>
+    <li>Estymacja przedziałowa: przedział ufności dla prawdopodobieństwa:</li>
+    <ul>
+        <li>przedział dla średniej populacji normalnej, </li>
+        <li>przypadek, gdzie jest znane odchylenie, </li>
+        <li>przypadek, gdzie jest nieznane odchylenie. </li>
+    </ul>
+</ul>
+
+<div class="miary">
+    <h1>Miary średnie: </h1>
+
+          <div class="form-group col-4">
+            <p>Wprowadź dane (np. 1, 2, -5, 5)</p>
+            <textarea
+              rows="5"
+              class="form-control"
+              [(ngModel)]="numbers"
+              (keyup)="inputNumbers();"
+              style="width: 100%;">
+            </textarea>
+        </div>
+
+        <div class="form-group col-6">
+                <p>Średnia arytmetyczna</p>
+                <textarea
+                  [value]="mean"
+                  class="form-control min"
+                  name="averageMeasure"
+                  readonly>
+                </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Kwantyle 50</p>
+          <textarea
+            [value]="Quartile_50"
+            class="form-control min"
+            name="Quartile50"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Kwantyle 25</p>
+          <textarea
+            [value]="Quartile_25"
+            class="form-control min"
+            name="Quartile25"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Kwantyle 75</p>
+          <textarea
+            [value]="Quartile_75"
+            class="form-control min"
+            name="Quartile75"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+              <p>Średnia harmoniczna </p>
+              <textarea
+                [value]="harmean"
+                class="form-control min"
+                name="averageHarmean"
+                readonly>
+              </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Mediana</p>
+          <textarea
+            [value]="Median"
+            class="form-control min"
+            name="Median"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Sortowanie wartości</p>
+          <textarea
+            [value]="Array_Sort_Numbers"
+            class="form-control min"
+            name="ArraySortNumbers"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Średnia geometryczna </p>
+          <textarea
+            [value]="geomean"
+            class="form-control min"
+            name="averageGeomean"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Odchylenie standardowe</p>
+          <textarea
+            [value]="Array_Stdev"
+            class="form-control min"
+            name="ArrayStdev"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Dominanta </p>
+          <textarea
+            [value]="dominanta"
+            class="form-control min"
+            name="averageMode"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Przedział ufności </p>
+          <textarea
+            [value]="confidenceNorm"
+            class="form-control min"
+            name="confidenceNorm"
+            readonly>
+          </textarea>
+        </div>
+<h3>Przedział ufności dla prawdopodobieństwa</h3>
+        <div class="form-group col-4">
+          <p>Alfa</p>
+          <textarea
+            class="form-control"
+            [(ngModel)]="alfa"
+            (keyup)="inputNumbers();"
+            style="width: 100%;">
+          </textarea>
+
+          <div class="form-group col-4">
+            <p>Odch. stand.</p>
+            <textarea
+              class="form-control"
+              [(ngModel)]="odchylenieStandardowe"
+              (keyup)="inputNumbers();"
+              style="width: 100%;">
+            </textarea>
+      </div>
+
+      <div class="form-group col-4">
+        <p>Rozmiar</p>
+        <textarea
+          class="form-control"
+          [(ngModel)]="rozmiar"
+          (keyup)="inputNumbers();"
+          style="width: 100%;">
+        </textarea>
+  </div>
+        <div class="form-group col-6">
+            <p><b>harmean(X) = {{ harmean }}</b></p>
+        </div>
+
+        <igx-category-chart [dataSource]="data"
+        width="700px"
+        height="500px">
+        </igx-category-chart>
+
+</div>
+<!--<div class="my">
+    <h1>Miary średnie: </h1>
+    <form class="form">
+        <label for="manuallyGeneratedNumbersInput">Wprowadź dane (np. -5, 1, 8, 7, 2 )</label>
+      <textarea
+        [(ngModel)]="ManuallyGeneratedNumbers"
+        class="form-control min"
+        name="manuallyGeneratedNumbersInput"
+      >
+      </textarea>
+    </form>
+</div>-->
