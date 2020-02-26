@@ -14,8 +14,8 @@ export class AverageMeasures {
         var sum = 0;
         var i;
         for(i=0;i<arr.length;i++){
-            sum = sum + parseFloat((1+arr[i]).toString());
-        return parseFloat((arr.length/sum).toString());
+            sum = sum + 1+arr[i];
+        return arr.length/sum;
         }  
     }
 

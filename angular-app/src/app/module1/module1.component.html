@@ -129,6 +129,44 @@
         </div>
 
         <div class="form-group col-6">
+          <p>Przedział ufności </p>
+          <textarea
+            [value]="confidenceNorm"
+            class="form-control min"
+            name="confidenceNorm"
+            readonly>
+          </textarea>
+        </div>
+<h3>Przedział ufności dla prawdopodobieństwa</h3>
+        <div class="form-group col-4">
+          <p>Alfa</p>
+          <textarea 
+            class="form-control" 
+            [(ngModel)]="alfa" 
+            (keyup)="inputNumbers();" 
+            style="width: 100%;">
+          </textarea>
+
+          <div class="form-group col-4">
+            <p>Odch. stand.</p>
+            <textarea 
+              class="form-control" 
+              [(ngModel)]="odchylenieStandardowe" 
+              (keyup)="inputNumbers();" 
+              style="width: 100%;">
+            </textarea>
+      </div>
+
+      <div class="form-group col-4">
+        <p>Rozmiar</p>
+        <textarea 
+          class="form-control" 
+          [(ngModel)]="rozmiar" 
+          (keyup)="inputNumbers();" 
+          style="width: 100%;">
+        </textarea>
+  </div>
+        <div class="form-group col-6">
             <p><b>harmean(X) = {{ harmean }}</b></p>
         </div>
 

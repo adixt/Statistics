@@ -36,6 +36,13 @@ export class Module1Component implements OnInit {
   Median: Number = 0;
   Array_Sort_Numbers: string;
   Array_Stdev: Number = 0;
+  confidenceNorm: Number = 0;
+  alfa: string;
+  rozmiar: string;
+  odchylenieStandardowe: string;
+  confidenceT: Number = 0;
+  quartileexc: Number = 0;
+  quartileinc: Number = 0;
   constructor() { }
 
   ngOnInit() {
@@ -113,6 +120,31 @@ export class Module1Component implements OnInit {
     this.quartile = worksheet.rows(1).cells(1).value;
     console.log('QUARTILE is ' + this.quartile);*/
 
+    var confidenceFormula = Formula.parse("=_xlfn.CONFIDENCE.NORM("+this.alfa+";"+this.odchylenieStandardowe+";"+this.rozmiar+"A1:A55)", CellReferenceMode.A1);
+    confidenceFormula.applyTo(worksheet.rows(1).cells(1));
+    this.confidenceNorm = worksheet.rows(1).cells(1).value;
+    console.log('CONFIDENCE is ' + this.confidenceNorm);
+
+    
+    var confidenceFormula = Formula.parse("=CONFIDENCE.NORM("+this.alfa+";"+this.odchylenieStandardowe+";"+this.rozmiar+"A1:A55)", CellReferenceMode.A1);
+    confidenceFormula.applyTo(worksheet.rows(1).cells(1));
+    this.confidenceNorm = worksheet.rows(1).cells(1).value;
+    console.log('CONFIDENCE2 is ' + this.confidenceNorm);
+
+    var confidenceTFormula = Formula.parse("=_xlfn.CONFIDENCE.T("+this.alfa+";"+this.odchylenieStandardowe+";"+this.rozmiar+"A1:A55)", CellReferenceMode.A1);
+    confidenceTFormula.applyTo(worksheet.rows(1).cells(1));
+    this.confidenceT = worksheet.rows(1).cells(1).value;
+    console.log('CONFIDENCE T is ' + this.confidenceT);
+
+    var quartileFormula = Formula.parse("=xlfn.QUARTILE.EXC("+this.alfa+";"+this.odchylenieStandardowe+";"+this.rozmiar+"A1:A55)", CellReferenceMode.A1);
+    quartileFormula.applyTo(worksheet.rows(1).cells(1));
+    this.quartileexc = worksheet.rows(1).cells(1).value;
+    console.log('CONFIDENCE is ' + this.quartileexc);
+
+    var quartileIncFormula = Formula.parse("=_xlfn.QUARTILE.INC("+this.alfa+";"+this.odchylenieStandardowe+";"+this.rozmiar+"A1:A55)", CellReferenceMode.A1);
+    quartileIncFormula.applyTo(worksheet.rows(1).cells(1));
+    this.quartileinc = worksheet.rows(1).cells(1).value;
+    console.log('CONFIDENCE is ' + this.quartileinc);
   }
 
   stringToFloatList(str) {
