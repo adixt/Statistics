@@ -1,4 +1,5 @@
 <h1>Monika Bartczak</h1>
+<h2>PRACE W TOKU</h2>
 <ul>
     <li>Miary średnie: </li>
     <ul>
@@ -38,7 +39,97 @@
         </div>
 
         <div class="form-group col-6">
-            <p><b>mean(X) = {{ mean }}</b></p>
+          <p>Kwantyle 50</p>
+          <textarea
+            [value]="Quartile_50"
+            class="form-control min"
+            name="Quartile50"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Kwantyle 25</p>
+          <textarea
+            [value]="Quartile_25"
+            class="form-control min"
+            name="Quartile25"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Kwantyle 75</p>
+          <textarea
+            [value]="Quartile_75"
+            class="form-control min"
+            name="Quartile75"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+              <p>Średnia harmoniczna </p>
+              <textarea
+                [value]="harmean"
+                class="form-control min"
+                name="averageHarmean"
+                readonly>
+              </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Mediana</p>
+          <textarea
+            [value]="Median"
+            class="form-control min"
+            name="Median"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Sortowanie wartości</p>
+          <textarea
+            [value]="Array_Sort_Numbers"
+            class="form-control min"
+            name="ArraySortNumbers"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Średnia geometryczna </p>
+          <textarea
+            [value]="geomean"
+            class="form-control min"
+            name="averageGeomean"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Odchylenie standardowe</p>
+          <textarea
+            [value]="Array_Stdev"
+            class="form-control min"
+            name="ArrayStdev"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Dominanta </p>
+          <textarea
+            [value]="dominanta"
+            class="form-control min"
+            name="averageMode"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+            <p><b>harmean(X) = {{ harmean }}</b></p>
         </div>
 
         <igx-category-chart [dataSource]="data"
