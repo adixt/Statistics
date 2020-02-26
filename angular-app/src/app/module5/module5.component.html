@@ -1,43 +1,158 @@
-<h1>Piotr Jedyk</h1>
-
-<ul>
-    <li>Rozkład średniej arytmetycznej z próby</li>
-    <li>Rozkład t-Studenta</li>
-    <li>Test losowości próby (serii, Walda-Wolfowitza)</li>
-    <li>Prawdopodobieństwo warunkowe, test niezależności x2</li>
-</ul>
-
-<h2>Rozkład średniej arytmetycznej z próby</h2>
-
-<p mathjax>
-    <strong>Def.</strong> Próbą losową prostą nazywamy ciąg \(n\)-zmiennych
-    losowych \((X_1, X_2, \ldots, X_n)\) niezależnych i posiadających jednakowe
-    rozkłady takie jak rozkład zmiennej losowej \(X\) w populacji generalnej.
-</p>
-
-<p mathjax>
-    <strong>Def.</strong> Statystyką (z próby) nazywamy zmienną losową \(Z_n\)
-    będącą funkcją zmiennych losowych \(X_1, X_2 , \ldots, X_n\) stanowiących
-    próbę losową.
-</p>
-
-<h3>Rozkład normalny, znane <span mathjax>\(\sigma\)</span></h3>
-
-<p mathjax>
-    Jeśli \(X \sim N(m, \sigma)\) to <strong>średnia arytmetyczna
-    z próby</strong> \({{"\\overline{X} = \\frac{1}{n}\\sum_{i=1}^n X_i"}}\)
-    ma rozkład \({{"\\overline{X} \\sim N\\left(m, \\frac{\\sigma}{\\sqrt{n}\}\\right)"}}\).
-</p>
-
-<h3>Rozkład normalny, nieznane <span mathjax>\(\sigma\)</span></h3>
-
-<p mathjax>
-    Średnią arytmetyczną z próby można doprowadzić do postaci standardowej
-    \({{"Z = \\frac{\\overline{X}-m}{\\sigma}\\sqrt{n}"}}\). Zmienna losowa tej
-    postaci ma rozkład t-Studenta. Dla wielkości próbki \(n\) stosuje się
-    rozkład o \(n-1\) stopniach swobody. Wartość oczekiwana wynosi \(0\),
-    odchylenie standardowe \({{"\\frac{\\sqrt{n-1}\}{\\sqrt{n-3}\}"}}\)
-</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1>Piotr Jedyk</h1>
+            <ul>
+                <li>Rozkład średniej arytmetycznej z próby</li>
+                <li>Rozkład t-Studenta</li>
+                <li>Test losowości próby (serii, Walda-Wolfowitza)</li>
+                <li>Prawdopodobieństwo warunkowe, test niezależności x2</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h2>Rozkład średniej arytmetycznej z próby</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-4">
+            <p mathjax>
+                <strong>Def.</strong> Próbą losową prostą nazywamy ciąg \(n\)-zmiennych
+                losowych \((X_1, X_2, \ldots, X_n)\) niezależnych i posiadających jednakowe
+                rozkłady takie jak rozkład zmiennej losowej \(X\) w populacji generalnej.
+            </p>
+            <p mathjax>
+                <strong>Def.</strong> Statystyką (z próby) nazywamy zmienną losową \(Z_n\)
+                będącą funkcją zmiennych losowych \(X_1, X_2 , \ldots, X_n\) stanowiących
+                próbę losową.
+            </p>
+        </div>
+        <div class="col-xl-8">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Rozkład normalny, znane <span mathjax>\(\sigma\)</span></h4>
+                    <p mathjax>
+                        Jeśli \(X \sim N(m, \sigma)\) to <strong>średnia arytmetyczna
+                        z próby</strong> \({{"\\overline{X} = \\frac{1}{n}\\sum_{i=1}^n X_i"}}\)
+                        ma rozkład \({{"\\overline{X} \\sim N\\left(m, \\frac{\\sigma}{\\sqrt{n}\}\\right)"}}\).
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h4>Rozkład normalny, nieznane <span mathjax>\(\sigma\)</span></h4>
+                    <p mathjax>
+                        Średnią arytmetyczną z próby można doprowadzić do postaci standardowej
+                        \({{"Z = \\frac{\\overline{X}-m}{\\sigma}\\sqrt{n}"}}\). Zmienna losowa tej
+                        postaci ma rozkład t-Studenta. Dla wielkości próbki \(n\) stosuje się
+                        rozkład o \(n-1\) stopniach swobody. Wartość oczekiwana wynosi \(0\),
+                        odchylenie standardowe \({{"\\frac{\\sqrt{n-1}\}{\\sqrt{n-3}\}"}}\)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h3>Zadanie</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-4">
+            <form [formGroup]="populationForm" (ngSubmit)="generateNewPopulation(populationForm.value.t1_N, populationForm.value.t1_mu, populationForm.value.t1_sigma)">
+                <div class="row form-group">
+                    <label for="t1_N" class="col-sm-6 col-form-label">Liczebność populacji</label>
+                    <div class="col-sm-6">
+                        <input id="t1_N" formControlName="t1_N" type="number" class="form-control" min="1" max="100000" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="t1_mu" class="col-sm-6 col-form-label">Wartość oczekiwana</label>
+                    <div class="col-sm-6">
+                        <input id="t1_mu" formControlName="t1_mu" type="number" class="form-control" min="-1000" max="1000" step="0.01" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="t1_sigma" class="col-sm-6 col-form-label">Odchylenie standardowe</label>
+                    <div class="col-sm-6">
+                        <input id="t1_sigma" formControlName="t1_sigma" type="number" class="form-control" min="0.01" max="10" step="0.01" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary" [disabled]="autoExperimentTimer">Wygeneruj nową populację</button>
+                    </div>
+                </div>
+            </form>
+            <form [formGroup]="experimentForm" (ngSubmit)="generateNewExperiment(experimentForm.value.t1_n)">
+                <div class="row form-group">
+                    <label for="t1_n" class="col-sm-6 col-form-label">Wielkość próby</label>
+                    <div class="col-sm-6">
+                        <input id="t1_n" formControlName="t1_n" type="number" class="form-control" min="1" max="100000" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-12">
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary" [disabled]="!population || autoExperimentTimer">Przeprowadź doświadczenie</button>
+                            <button type="button" class="btn btn-success" [disabled]="!population" *ngIf="!autoExperimentTimer" (click)="startAutoMode()">Uruchom tryb automatyczny</button>
+                            <button type="button" class="btn btn-danger" *ngIf="autoExperimentTimer" (click)="stopAutoMode()">Zatrzymaj tryb automatyczny</button>
+                            <button type="button" class="btn btn-danger" [disabled]="!population || experiments.length <= 0" (click)="resetExperiments()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form [formGroup]="resultsForm">
+                <div class="row form-group">
+                    <label for="t1_nc" class="col-sm-6 col-form-label">Ilość doświadczeń</label>
+                    <div class="col-sm-6">
+                        <input id="t1_nc" formControlName="t1_nc" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="t1_muc" class="col-sm-6 col-form-label">Średnia arytmetyczna</label>
+                    <div class="col-sm-6">
+                        <input id="t1_muc" formControlName="t1_muc" type="text" class="form-control" />
+                        <small class="text-muted form-text">Ostatnie doświadczenie</small>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="t1_mut" class="col-sm-6 col-form-label"></label>
+                    <div class="col-sm-6">
+                        <input id="t1_mut" formControlName="t1_mut" type="text" class="form-control" />
+                        <small class="text-muted form-text">Wszystkie doświadczenia (średnia średnich)</small>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="t1_sigmac" class="col-sm-6 col-form-label">Odchylenie standardowe</label>
+                    <div class="col-sm-6">
+                        <input id="t1_sigmac" formControlName="t1_sigmac" type="text" class="form-control" />
+                        <small class="text-muted form-text">Ostatnie doświadczenie</small>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="t1_sigmat" class="col-sm-6 col-form-label"></label>
+                    <div class="col-sm-6">
+                        <input id="t1_sigmat" formControlName="t1_sigmat" type="text" class="form-control" />
+                        <small class="text-muted form-text">Wszystkie doświadczenia (odchylenie średnich)</small>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="t1_sigmax" class="col-sm-6 col-form-label"></label>
+                    <div class="col-sm-6">
+                        <input id="t1_sigmax" formControlName="t1_sigmax" type="text" class="form-control" />
+                        <small class="text-muted form-text" mathjax>Wartość teoretyczna \({{"\\frac{\\sigma}{\\sqrt{n}\}"}}\)</small>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-8">
+            <div id="t1chart" style="min-height: 400px; height: 100%;"></div>
+            <br style="clear: both;" />
+        </div>
+    </div>
+</div>
 
 <h2>Rozkład t-Studenta</h2>
 
@@ -52,7 +167,17 @@
 
 <h2>Test losowości próby (serii, Walda-Wolfowitza)</h2>
 
-113
+<p mathjax>
+    <strong>Def.</strong> Serią nazywamy każdy podciąg złożony z kolejnych
+    elementów jednego rodzaju utworzony w ciągu uporządkowanych w dowolny
+    sposób elementów dwóch rodzajów.
+</p>
+
+<p mathjax>
+    Dana jest populacja generalna o dowolnym rozkładzie. Z populacji tej
+    pobrano próbę \(n\) elementów. Sprawdzenie hipotezy, że jest to próba
+    losowa jest testem losowości próby.
+</p>
 
 <h2>Prawdopodobieństwo warunkowe, test niezależności x2</h2>
 
