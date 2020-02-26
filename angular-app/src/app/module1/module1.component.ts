@@ -57,11 +57,11 @@ export class Module1Component implements OnInit {
       counter++;
     });
     this.data=values;
-    var chart = worksheet.shapes().addChart(ChartType.ColumnClustered,
-      worksheet.rows(0).cells(0), { x: 0, y: 0 },
-      worksheet.rows(0).cells(12), { x: 100, y: 100 });
+    ///var chart = worksheet.shapes().addChart(ChartType.ColumnClustered,
+    ///  worksheet.rows(0).cells(0), { x: 0, y: 0 },
+    ///  worksheet.rows(0).cells(12), { x: 100, y: 100 });
 
-    chart.setSourceData("A2:M6", true);
+    ///chart.setSourceData("A2:M6", true);
     //Accessing a range of cells
     // worksheet.rows(0).cells(0).value = 1;
     // worksheet.rows(1).cells(0).value = 2;
@@ -85,20 +85,5 @@ export class Module1Component implements OnInit {
 
     this.mean = AverageMeasures.mean(values);
   } 
-
-  /*set ManuallyGeneratedNumbers(value: string) {
-    const values = value
-      .split(/[\s,\\n]+/)
-      .filter((el) => {
-        return el != null && el !== '';
-      }).map((x) => {
-        return parseFloat(x);
-      });
-    this.CalculateStatisticValues();
-  }
-
-  CalculateStatisticValues() {
-   
-  }*/
 
 }
