@@ -14,10 +14,10 @@ import { IgxExcelModule } from 'igniteui-angular-excel';
   imports: [
     CommonModule,
     Module1RoutingModule,
-    IgxExcelModule,
+    // IgxExcelModule,
     IgxCategoryChartModule,
     FormsModule,
   ]
 })
 export class Module1Module { }
-export class AppModule {}
+// export class AppModule {}
