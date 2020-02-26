@@ -15,7 +15,7 @@
 
 <div class="miary">
     <h1>Miary średnie: </h1>
-    <form class="form">
+
           <div class="form-group col-4">
             <p>Wprowadź dane (np. 1, 2, -5, 5)</p>
             <textarea 
@@ -41,8 +41,11 @@
             <p><b>mean(X) = {{ mean }}</b></p>
         </div>
 
-        
-    </form>
+        <igx-category-chart [dataSource]="data"
+        width="700px"
+        height="500px">
+        </igx-category-chart>
+
 </div>
 <!--<div class="my">
     <h1>Miary średnie: </h1>
