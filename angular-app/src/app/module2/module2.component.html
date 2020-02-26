@@ -53,7 +53,7 @@
       </div>
     </form>
   </section>
-  
+
 
 
 
@@ -275,10 +275,10 @@
         <div class="col-lg-6 col-md-6 col-sm-12">
           <label for="SampleSize">
             Please input the size of the sample
-            <small class="error text-danger"
+            <!-- <small class="error text-danger"
               *ngIf="minimumSampleSizeFormAverage.get('SampleSize').invalid && minimumSampleSizeFormAverage.get('SampleSize').errors.required && (minimumSampleSizeFormAverage.get('SampleSize').dirty || minimumSampleSizeFormAverage.get('SampleSize').touched || minimumSampleSizeFormAverage.submitted)">
               (*This field is required)
-            </small>
+            </small> -->
           </label>
           <input formControlName="SampleSize" type="text" name="SampleSize" class="form-control" autocomplete="off"
             placeholder="n=(numerical value)" />
@@ -313,7 +313,7 @@
       </div>
     </form>
   </section>
-  
+
 
 
 
@@ -335,16 +335,16 @@
   <section class="section">
     <form [formGroup]="SignificanceForm" (ngSubmit)="onCalculateSignificanceFormSubmit()"
     #ngSignificanceForm="ngForm">
-        
+
     <h2>Topic 5 - Significance test for average population value</h2>
         <div class="row section_row">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="confidenceInterval">
                 Please input the confidence interval
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceForm.get('confidenceInterval').invalid && SignificanceForm.get('confidenceInterval').errors.required && (SignificanceForm.get('confidenceInterval').dirty || SignificanceForm.get('confidenceInterval').touched || SignificanceForm.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <select formControlName="confidenceInterval" name="confidenceInterval" class="form-control" autocomplete="off">
                 <option disabled value="null">Select one of the values a=(0,1% 1% 5 %)</option>
@@ -362,10 +362,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="StdOfDistribution">
                 Please input the standard deviation the distribution of the data set
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceForm.get('StdOfDistribution').invalid && SignificanceForm.get('StdOfDistribution').errors.required && (SignificanceForm.get('StdOfDistribution').dirty || SignificanceForm.get('StdOfDistribution').touched || SignificanceForm.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <input formControlName="StdOfDistribution" type="text" name="StdOfDistribution" class="form-control"
                 autocomplete="off" placeholder="std=(numerical value, float)" />
@@ -376,10 +376,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="SampleSize">
                 Please input the size of the sample
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceForm.get('SampleSize').invalid && SignificanceForm.get('SampleSize').errors.required && (SignificanceForm.get('SampleSize').dirty || SignificanceForm.get('SampleSize').touched || SignificanceForm.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <input formControlName="SampleSize" type="text" name="SampleSize" class="form-control" autocomplete="off"
                 placeholder="n=(numerical value)" />
@@ -390,10 +390,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="AverageValue">
                 Please input the average value
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceForm.get('AverageValue').invalid && SignificanceForm.get('AverageValue').errors.required && (SignificanceForm.get('AverageValue').dirty || SignificanceForm.get('AverageValue').touched || SignificanceForm.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <input formControlName="AverageValue" type="text" name="AverageValue" class="form-control" autocomplete="off"
                 placeholder="av=(numerical value)" />
@@ -404,15 +404,15 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="ExpectedValue">
                 Please input the expected value
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceForm.get('ExpectedValue').invalid && SignificanceForm.get('ExpectedValue').errors.required && (SignificanceForm.get('ExpectedValue').dirty || SignificanceForm.get('ExpectedValue').touched || SignificanceForm.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <input formControlName="ExpectedValue" type="text" name="ExpectedValue" class="form-control" autocomplete="off"
                 placeholder="ev=(numerical value)" />
             </div>
-        
+
 
 
         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -447,16 +447,16 @@
   <section class="section">
     <form [formGroup]="SignificanceFormAverage" (ngSubmit)="onCalculateSignificanceFormAverageSubmit()"
     #ngSignificanceFormAverage="ngForm">
-        
+
     <h2>Topic 6 - Significance test for average population value, unknown standard deviation</h2>
         <div class="row section_row">
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="confidenceInterval">
                 Please input the confidence interval
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceFormAverage.get('confidenceInterval').invalid && SignificanceFormAverage.get('confidenceInterval').errors.required && (SignificanceFormAverage.get('confidenceInterval').dirty || SignificanceFormAverage.get('confidenceInterval').touched || SignificanceFormAverage.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <select formControlName="confidenceInterval" name="confidenceInterval" class="form-control" autocomplete="off">
                 <option disabled value="null">Select one of the values a=(0,1% 1% 5 %)</option>
@@ -474,10 +474,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="StdOfDistribution">
                 Please input the standard deviation the samples of the data set
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceFormAverage.get('StdOfDistribution').invalid && SignificanceFormAverage.get('StdOfDistribution').errors.required && (SignificanceFormAverage.get('StdOfDistribution').dirty || SignificanceFormAverage.get('StdOfDistribution').touched || SignificanceFormAverage.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <input formControlName="StdOfDistribution" type="text" name="StdOfDistribution" class="form-control"
                 autocomplete="off" placeholder="std=(numerical value, float)" />
@@ -488,10 +488,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="SampleSize">
                 Please input the size of the sample
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceFormAverage.get('SampleSize').invalid && SignificanceFormAverage.get('SampleSize').errors.required && (SignificanceFormAverage.get('SampleSize').dirty || SignificanceFormAverage.get('SampleSize').touched || SignificanceFormAverage.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <input formControlName="SampleSize" type="text" name="SampleSize" class="form-control" autocomplete="off"
                 placeholder="n=(numerical value)" />
@@ -502,10 +502,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="AverageValue">
                 Please input the average value
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceFormAverage.get('AverageValue').invalid && SignificanceFormAverage.get('AverageValue').errors.required && (SignificanceFormAverage.get('AverageValue').dirty || SignificanceFormAverage.get('AverageValue').touched || SignificanceFormAverage.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <input formControlName="AverageValue" type="text" name="AverageValue" class="form-control" autocomplete="off"
                 placeholder="av=(numerical value)" />
@@ -516,15 +516,15 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <label for="ExpectedValue">
                 Please input the expected value
-                <small class="error text-danger"
+                <!-- <small class="error text-danger"
                   *ngIf="SignificanceFormAverage.get('ExpectedValue').invalid && SignificanceFormAverage.get('ExpectedValue').errors.required && (SignificanceFormAverage.get('ExpectedValue').dirty || SignificanceFormAverage.get('ExpectedValue').touched || SignificanceFormAverage.submitted)">
                   (*This field is required)
-                </small>
+                </small> -->
               </label>
               <input formControlName="ExpectedValue" type="text" name="ExpectedValue" class="form-control" autocomplete="off"
                 placeholder="ev=(numerical value)" />
             </div>
-        
+
 
 
         <div class="col-lg-6 col-md-6 col-sm-12">

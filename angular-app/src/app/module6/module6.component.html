@@ -1,2 +1,145 @@
-<p>module6 works!</p>
 <h1>Piotr Koch</h1>
+
+<ul>
+    
+      <li>rozkład wariancji z próby</li>
+      <li>ilościowe miary siły korelacji- współczynnik korelacji liniowej Pearsona</li>
+      <li>rozkład Poissona</li>
+</ul> 
+
+<div class = "miary">
+    <h1>Rozkład wariancji z próby</h1>
+    <form class="form">
+      <div class = "row">
+        <div class="form-group col-4">
+          <label for="manuallyGeneratedNumbersInput"
+            >Wariancje z prób e.g.(1,2,3)</label>
+          <textarea
+            [(ngModel)]="ManuallyGeneratedNumbers5"
+            class="form-control min"
+            name="manuallyGeneratedNumbersInput"
+          >
+          </textarea>
+        </div>
+        <div class="form-group col-4">
+          <label for="manuallyGeneratedNumbersInput6"
+            >Wariancja (&sigma;<sup>2</sup>)</label
+          >
+          <textarea
+            [(ngModel)]="ManuallyGeneratedNumbers6"
+            class="form-control min2"
+            name="manuallyGeneratedNumbers2Input"
+          >
+          </textarea>
+
+        </div>
+      </div> 
+      <div class="row">
+        <div class="form-group col-6">
+          <label for="varianceInput">Rozkład wariancji z próby</label>
+          <input
+            type="number"
+            [value]="VarianceRate"
+            class="form-control"
+            name="varianceInput"
+            readonly
+          />
+        </div>
+      </div>
+    </form>
+    <h1>Ilościowe miary siły korelacji- współczynnik korelacji liniowej Pearsona</h1>
+    <form class="form">
+      <div class = "row">
+        <div class="form-group col-4">
+          <label for="manuallyGeneratedNumbersInput"
+            >Type manually elements here (e.g. -5, 1, 8, 7, 2 )</label
+          >
+          <textarea
+            [(ngModel)]="ManuallyGeneratedNumbers"
+            class="form-control min"
+            name="manuallyGeneratedNumbersInput"
+          >
+          </textarea>
+        </div>
+        <div class="form-group col-4">
+          <label for="manuallyGeneratedNumbersInput"
+            >Type manually elements here (e.g. -5, 1, 8, 7, 2 )</label
+          >
+          <textarea
+            [(ngModel)]="ManuallyGeneratedNumbers2"
+            class="form-control min2"
+            name="manuallyGeneratedNumbers2Input"
+          >
+          </textarea>
+
+        </div>
+      </div> 
+      <div class="row">
+        <div class="form-group col-6">
+          <label for="varianceInput">Współczynnik korelacji liniowej Pearsona (r<sub>xy</sub>)</label>
+          <input
+            type="number"
+            [value]="PearsonRate"
+            class="form-control"
+            name="varianceInput"
+            readonly
+          />
+        </div>
+      <ul>
+        <li>r<sub>xy</sub> <=0,3 - słaba</li>
+        <li>0,3 < r<sub>xy</sub> <= 0,5 - średnia</li>
+        <li>r<sub>xy</sub> > 0,5 - silna</li>
+      </ul>
+      </div>
+      <div>
+          <button (click)="drawChart()" hidden>Draw graph</button>
+          <div id="googleChartHereVelocity" style="width: 800px; height: 400px;">
+            waiting for the input data...
+          </div>
+        </div>
+    </form>
+    <h1>Rozkład Poissona</h1>
+    <form class="Form">
+      <div class="row">  
+        <div class="form-group col-4">
+            <label for="manuallyGeneratedNumbersInput"
+              >Oczekiwana liczba zdarzen w przedziale czasu 	(&Lambda;)</label
+            >
+            <textarea
+              [(ngModel)]="ManuallyGeneratedNumbers3"
+              class="form-control min2"
+              name="manuallyGeneratedNumbers2Input"
+            >
+            </textarea>
+          </div>
+          <div class="form-group col-4">
+              <label for="manuallyGeneratedNumbersInput"
+                >Liczba wystapien zdarzenia (x)</label
+              >
+              <textarea
+                [(ngModel)]="ManuallyGeneratedNumbers4"
+                class="form-control min2"
+                name="manuallyGeneratedNumbers2Input"
+              >
+              </textarea>
+            </div>
+        
+            <div class="form-group col-6">
+              <label for="varianceInput">Rozkład Poissona</label>
+              <input
+                type="number"
+                [value]="PoissonRate"
+                class="form-control"
+                name="varianceInput"
+                readonly
+              />
+            </div>
+            
+          </div>
+    </form>
+    <div class="row">
+        <div class="terminal" >
+          <pre>{{ LearnCode }}</pre>
+        </div>
+    </div>
+</div>
