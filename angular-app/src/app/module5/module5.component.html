@@ -55,7 +55,13 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <h3>Zadanie</h3>
+            <h3>Test</h3>
+            <p>
+                Wygeneruj populację o rozkładzie normalnym. Następnie przeprowadź
+                doświadczenia. Zgodnie z teorią, odchylenie standardowe średnich arytmetycznych
+                z każdego doświadczenia (przedostatnie pole wyniku) powinno dążyć do wartości
+                teoretycznej (ostatnie pole).
+            </p>
         </div>
     </div>
     <div class="row">
@@ -64,19 +70,19 @@
                 <div class="row form-group">
                     <label for="t1_N" class="col-sm-6 col-form-label">Liczebność populacji</label>
                     <div class="col-sm-6">
-                        <input id="t1_N" formControlName="t1_N" type="number" class="form-control" min="1" max="100000" />
+                        <input id="t1_N" formControlName="t1_N" type="number" class="form-control" />
                     </div>
                 </div>
                 <div class="row form-group">
                     <label for="t1_mu" class="col-sm-6 col-form-label">Wartość oczekiwana</label>
                     <div class="col-sm-6">
-                        <input id="t1_mu" formControlName="t1_mu" type="number" class="form-control" min="-1000" max="1000" step="0.01" />
+                        <input id="t1_mu" formControlName="t1_mu" type="number" class="form-control" step="0.01" />
                     </div>
                 </div>
                 <div class="row form-group">
                     <label for="t1_sigma" class="col-sm-6 col-form-label">Odchylenie standardowe</label>
                     <div class="col-sm-6">
-                        <input id="t1_sigma" formControlName="t1_sigma" type="number" class="form-control" min="0.01" max="10" step="0.01" />
+                        <input id="t1_sigma" formControlName="t1_sigma" type="number" class="form-control" step="0.01" />
                     </div>
                 </div>
                 <div class="row form-group">
@@ -89,7 +95,7 @@
                 <div class="row form-group">
                     <label for="t1_n" class="col-sm-6 col-form-label">Wielkość próby</label>
                     <div class="col-sm-6">
-                        <input id="t1_n" formControlName="t1_n" type="number" class="form-control" min="1" max="100000" />
+                        <input id="t1_n" formControlName="t1_n" type="number" class="form-control" />
                     </div>
                 </div>
                 <div class="row form-group">
@@ -98,7 +104,7 @@
                             <button type="submit" class="btn btn-primary" [disabled]="!population || autoExperimentTimer">Przeprowadź doświadczenie</button>
                             <button type="button" class="btn btn-success" [disabled]="!population" *ngIf="!autoExperimentTimer" (click)="startAutoMode()">Uruchom tryb automatyczny</button>
                             <button type="button" class="btn btn-danger" *ngIf="autoExperimentTimer" (click)="stopAutoMode()">Zatrzymaj tryb automatyczny</button>
-                            <button type="button" class="btn btn-danger" [disabled]="!population || experiments.length <= 0" (click)="resetExperiments()">Reset</button>
+                            <button type="button" class="btn btn-danger" [disabled]="!population || experiments.length <= 0" (click)="resetExperiments()">Resetuj</button>
                         </div>
                     </div>
                 </div>
@@ -148,22 +154,50 @@
             </form>
         </div>
         <div class="col-xl-8">
-            <div id="t1chart" style="min-height: 400px; height: 100%;"></div>
+            <div id="t1chart" style="min-height: 600px; height: 100%;"></div>
+            <br style="clear: both;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h2>Rozkład t-Studenta</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-4">
+            <p mathjax>
+                <strong>Def.</strong> Rozkład Studenta z \(n\) stopniami swobody jest
+                rozkładem zmiennej losowej \(T\) postaci:
+                \({{"T = \\frac{U}{\\sqrt{Z}\}\\sqrt{n}"}}\), gdzie \(U\) jest zmienną
+                losową mającą standardowy rozkład normalny, \(Z\) jest zmienną losową
+                o rozkładzie chi kwadrat o \(n\) stopniach swobody oraz \(U\) i \(Z\) są
+                niezależne.
+            </p>
+            <form [formGroup]="tstudentForm" (ngSubmit)="generateNewTStudent(tstudentForm.value.t2_nu)">
+                <h3>Wykres</h3>
+                <div class="row form-group">
+                    <label for="t2_nu" class="col-sm-6 col-form-label" mathjax>Liczba stopni swobody (\(\nu\)):</label>
+                    <div class="col-sm-6">
+                        <input id="t2_nu" formControlName="t2_nu" type="number" class="form-control" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-12">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" (click)="generateNewCleanTStudent(tstudentForm.value.t2_nu)">Przerysuj</button>
+                            <button type="submit" class="btn btn-success">Dorysuj</button>
+                            <button type="button" class="btn btn-danger" (click)="resetTStudent()">Resetuj</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-8">
+            <div id="t2chart" style="min-height: 600px; height: 100%;"></div>
             <br style="clear: both;" />
         </div>
     </div>
 </div>
-
-<h2>Rozkład t-Studenta</h2>
-
-<p mathjax>
-    <strong>Def.</strong> Rozkład Studenta z \(n\) stopniami swobody jest
-    rozkładem zmiennej losowej \(T\) postaci:
-    \({{"T = \\frac{U}{\\sqrt{Z}\}\\sqrt{n}"}}\), gdzie \(U\) jest zmienną
-    losową mającą standardowy rozkład normalny, \(Z\) jest zmienną losową
-    o rozkładzie chi kwadrat o \(n\) stopniach swobody oraz \(U\) i \(Z\) są
-    niezależne.
-</p>
 
 <h2>Test losowości próby (serii, Walda-Wolfowitza)</h2>
 

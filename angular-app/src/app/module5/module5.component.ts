@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import * as CanvasJS from '../../assets/canvasjs.min';
+import { gamma } from 'mathjs';
 
 @Component({
   selector: 'app-module5',
@@ -12,11 +13,13 @@ export class Module5Component implements OnInit {
   populationForm: FormGroup;
   experimentForm: FormGroup;
   resultsForm: FormGroup;
+  tstudentForm: FormGroup;
   populationSigma: number;
   population: Array<number>;
   experiments: Array<number>;
   autoExperimentTimer = null;
   t1Chart: CanvasJS.Chart;
+  t2Chart: CanvasJS.Chart;
 
   constructor(private formBuilder: FormBuilder) {
     this.populationForm = this.formBuilder.group({
@@ -35,11 +38,14 @@ export class Module5Component implements OnInit {
       t1_sigmat: {'value': null, disabled: true},
       t1_sigmax: {'value': null, disabled: true}
     });
+    this.tstudentForm = this.formBuilder.group({
+      t2_nu: 1
+    });
   }
 
   ngOnInit() {
     this.t1Chart = new CanvasJS.Chart("t1chart", {
-      animationEnabled: true,
+      animationEnabled: false,
       theme: 'light2',
       data: [{
         type: "line",
@@ -47,6 +53,13 @@ export class Module5Component implements OnInit {
       }]
     });
     this.t1Chart.render();
+
+    this.t2Chart = new CanvasJS.Chart("t2chart", {
+      animationEnabled: false,
+      theme: 'light2',
+      data: []
+    });
+    this.t2Chart.render();
   }
 
   generateNewPopulation(N: number, mu: number, sigma: number) {
@@ -121,7 +134,45 @@ export class Module5Component implements OnInit {
     this.t1Chart.render();
   }
 
-  randn(mu: number, sigma: number) {
+  generateNewTStudent(nu: number) {
+    let data = []
+    let ax = {
+      type: "line",
+      legendText: `nu = ${nu}`,
+      showInLegend: true,
+      dataPoints: data
+    };
+
+    let lov = 0.01;
+    let dt = 0.05;
+
+    for (let t = 0, v = 1; v >= lov; t += dt) {
+      v = this.tstudent(t, nu);
+      data.push({x: t, y: v});
+    }
+
+    for (let t = 0, v = 1; v >= lov; t -= dt) {
+      v = this.tstudent(t, nu);
+      data.push({x: t, y: v});
+    }
+
+    data.sort((a, b) => (a.x > b.x) ? 1 : -1);
+
+    this.t2Chart.options.data.push(ax);
+    this.t2Chart.render();
+  }
+
+  generateNewCleanTStudent(nu: number) {
+    this.resetTStudent();
+    this.generateNewTStudent(nu);
+  }
+
+  resetTStudent() {
+    this.t2Chart.options.data = new Array;
+    this.t2Chart.render();
+  }
+
+  randn(mu: number, sigma: number): number {
     let s, u, v, n;
 
     do {
@@ -134,6 +185,13 @@ export class Module5Component implements OnInit {
     n = u * Math.sqrt(-2 * Math.log(s) / s);
 
     return sigma * n + mu;
+  }
+
+  tstudent(t: number, nu: number): number {
+    let a = <number>gamma((nu + 1) / 2) / (<number>gamma(nu / 2) * Math.sqrt(nu * Math.PI));
+    let b = Math.pow(1 + (t * t) / nu, -(nu + 1) / 2);
+
+    return a * b;
   }
 
 }
