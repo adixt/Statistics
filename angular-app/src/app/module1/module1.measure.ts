@@ -1,3 +1,5 @@
+import { numberToString } from 'igniteui-angular-core';
+
 export class AverageMeasures {
     static mean(arr: number[]): number {
         return arr.reduce((a,b) => a + b, 0) / arr.length;
@@ -9,25 +11,32 @@ export class AverageMeasures {
         return arr.length % 2 ? (arr[arr.length/2 - 0.5] + arr[arr.length/2 + 0.5]) / 2 : arr[arr.length/2];
     }
 
-    static harmean(arr: number[]) {
+    static harmean(arr: number[]): number {
 
-        var sum = 0;
-        var i;
-        for(i=0;i<arr.length;i++){
-            sum = sum + 1+arr[i];
-        return arr.length/sum;
-        }  
+        // var sum = 0;
+        // var i;
+        // for(i=0;i<arr.length;i++){
+        //     sum = sum + 1+arr[i];
+        // return arr.length/sum;
+        // } 
+        
+      //  return arr.reduce((a,b) => ((Math.sqrt(a*b)) * (Math.sqrt(a*b))) / ((a + b)/2)); 
+     // return arr.reduce((a,b) => Math.pow(a+b, 1.0 / arr.length)); 
+
+     var sum = arr.reduce((a,b) => (arr.length / (1/a + 1/b)));
+     console.log(arr.length + 'length');
+     return sum;
     }
 
-    static geometric(arr: number[]) {
+    static geometric(arr: number[]): number{
+      var i;
 
-        var product = 1;
-        var i;
-        for(i=0;i<arr.length;i++){
-            product = product * arr[i];
-        var gm = Math.pow(product, 1/arr.length)
-        return gm;
-        }  
+      var sum=arr.reduce((a,b) => a*b);
+
+      for(i=0; i<arr.length-2; i++){
+        sum = Math.sqrt(sum);
+      }
+      return sum;
     }
 
     static mode1(arr: number[]) {

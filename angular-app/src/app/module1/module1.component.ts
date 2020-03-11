@@ -56,6 +56,8 @@ export class Module1Component implements OnInit {
   }
 
   inputNumbers() {
+    console.log(4/(1/1+1/2+1/4+1/4));
+    this.calculateArithmeticMean();
     this.calculateArithmeticHarmean();
     this.calculateArithmeticGeometric();
     this.calculateArithmeticArray_Stdev();
@@ -74,10 +76,15 @@ export class Module1Component implements OnInit {
     });
   }
 
+  calculateArithmeticMean(): void {
+    var values = this.stringToFloatList(this.numbers);
+    this.mean = AverageMeasures.mean(values);
+   // console.log('mean' + this.mean);
+  }
+
   calculateArithmeticHarmean(): void {
     var values = this.stringToFloatList(this.numbers);
     this.harmean = AverageMeasures.harmean(values);
-    //this.mean = AverageMeasures.mean(values);
   }
 
   calculateArithmeticGeometric(): void {

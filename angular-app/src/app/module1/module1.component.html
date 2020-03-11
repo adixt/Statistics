@@ -39,6 +39,26 @@
         </div>
 
         <div class="form-group col-6">
+          <p>Średnia harmoniczna </p>
+          <textarea
+            [value]="harmean"
+            class="form-control min"
+            name="averageHarmean"
+            readonly>
+          </textarea>
+        </div>
+
+        <div class="form-group col-6">
+          <p>Średnia geometryczna </p>
+          <textarea
+            [value]="geomean"
+            class="form-control min"
+            name="averageGeomean"
+            readonly>
+          </textarea>
+        </div>
+        
+        <div class="form-group col-6">
           <p>Kwantyle 50</p>
           <textarea
             [value]="Quartile_50"
@@ -69,16 +89,6 @@
         </div>
 
         <div class="form-group col-6">
-              <p>Średnia harmoniczna </p>
-              <textarea
-                [value]="harmean"
-                class="form-control min"
-                name="averageHarmean"
-                readonly>
-              </textarea>
-        </div>
-
-        <div class="form-group col-6">
           <p>Mediana</p>
           <textarea
             [value]="Median"
@@ -94,16 +104,6 @@
             [value]="Array_Sort_Numbers"
             class="form-control min"
             name="ArraySortNumbers"
-            readonly>
-          </textarea>
-        </div>
-
-        <div class="form-group col-6">
-          <p>Średnia geometryczna </p>
-          <textarea
-            [value]="geomean"
-            class="form-control min"
-            name="averageGeomean"
             readonly>
           </textarea>
         </div>
