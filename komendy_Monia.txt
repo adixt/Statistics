@@ -1,6 +1,11 @@
+# Monia - jak słodko <3
+
 npm i typescript@3.5.3
-npm install -g igniteui-cli 
+npm install -g igniteui-cli
 
 npm install --save igniteui-angular-core
 npm install --save igniteui-angular-excel
+<<<<<<< HEAD
 
+=======
+>>>>>>> 558e87ebeb1e149908daca1b22e8a0d33eaa48c4
