@@ -29,7 +29,7 @@ export class Module1Component implements OnInit {
   quartile: Number = 0;
   max: Number = 0;
   dominanta: Number = 0;
-  data:any[];
+  data: any[];
   Quartile_50: Number = 0;
   Quartile_25: Number = 0;
   Quartile_75: Number = 0;
@@ -37,9 +37,16 @@ export class Module1Component implements OnInit {
   Array_Sort_Numbers: string;
   Array_Stdev: Number = 0;
   confidenceNorm: Number = 0;
-  alfa: string;
-  rozmiar: string;
-  odchylenieStandardowe: string;
+  m: Number;
+  n: Number;
+  p: Number;
+  z: Number;
+  k: Number;
+  resultUfnosc: String;
+  resultUfnoscZnaneOdchylenie: String;
+  Odchylenie: Number;
+  wielkosc: Number;
+  srednia: Number;
   confidenceT: Number = 0;
   quartileexc: Number = 0;
   quartileinc: Number = 0;
@@ -52,11 +59,10 @@ export class Module1Component implements OnInit {
       { "CountryName": "United States", "Pop1995": 266, "Pop2005": 295, "Pop2015": 322, "Pop2025": 351 },
       { "CountryName": "Indonesia", "Pop1995": 197, "Pop2005": 229, "Pop2015": 256, "Pop2025": 277 },
       { "CountryName": "Brazil", "Pop1995": 161, "Pop2005": 186, "Pop2015": 204, "Pop2025": 218 }
-     ];
+    ];
   }
 
   inputNumbers() {
-    console.log(4/(1/1+1/2+1/4+1/4));
     this.calculateArithmeticMean();
     this.calculateArithmeticHarmean();
     this.calculateArithmeticGeometric();
@@ -70,16 +76,16 @@ export class Module1Component implements OnInit {
 
   stringToFloatList(str) {
     return str.split(/[\s,\\n]+/).filter(function (el) {
-        return el != null && el != '';
+      return el != null && el != '';
     }).map(function (x) {
-        return parseFloat(x);
+      return parseFloat(x);
     });
   }
 
   calculateArithmeticMean(): void {
     var values = this.stringToFloatList(this.numbers);
     this.mean = AverageMeasures.mean(values);
-   // console.log('mean' + this.mean);
+    // console.log('mean' + this.mean);
   }
 
   calculateArithmeticHarmean(): void {
@@ -125,6 +131,23 @@ export class Module1Component implements OnInit {
   calculateArithmeticArray_Stdev(): void {
     var values = this.stringToFloatList(this.numbers);
     this.Array_Stdev = AverageMeasures.Array_Stdev(values);
+  }
+  calculateConfidence(): void {
+    console.log("m:" + this.m);
+    console.log("n:" + this.n);
+    console.log("p:" + this.p);
+    console.log("k:" + this.k);
+
+    this.resultUfnosc = AverageMeasures.confidence(this.m, this.n, this.p, this.k);
+  }
+  calculateConfidenceZnane(): void {
+    console.log("Odchylenie:" + this.Odchylenie);
+    console.log("wielkosc:" + this.wielkosc);
+    console.log("srednia:" + this.srednia);
+    console.log("z:" + this.z);
+    console.log("LuuL!!!");
+
+    this.resultUfnoscZnaneOdchylenie = AverageMeasures.confidenceZnaneOdchylenie(this.Odchylenie, this.wielkosc, this.srednia, this.z);
   }
 
 }
