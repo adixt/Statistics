@@ -27,7 +27,7 @@
     "igniteui-angular-core": "^8.2.12",
     "igniteui-angular-excel": "^8.2.12",
     "jerzy": "^0.2.1",
-    "mathjs": "^6.6.1",
+    "mathjs": "^7.5.1",
     "ngx-mathjax": "0.0.11",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
