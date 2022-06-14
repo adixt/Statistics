@@ -26,6 +26,6 @@ jobs:
 
       - name: Build
         run: |
-          cd UI/src/ClientApp/
+          cd angular-app/
           npm install
           npm run build-prod
