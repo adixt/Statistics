@@ -1,0 +1,39 @@
+name: Docker CI when PR to Master.
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get branch name (pull request)
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+
+      - name: Debug
+        run: echo ${{ env.BRANCH_NAME }}
+
+      - name: Check out code
+        uses: actions/checkout@v3
+  
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Set CHROME_BIN environment variable
+        run: |
+          echo "CHROME_BIN=$(which chrome)" >> $GITHUB_ENV
+          echo "CHROME_BIN = $CHROME_BIN"
+    
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16     
+          
+      - name: Unit Test Frontend
+        run: |
+          cd UI/src/ClientApp/
+          npm install
+          npm run build-prod
