@@ -1,0 +1,31 @@
+name: Docker MAster CI
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Set CHROME_BIN environment variable
+        run: |
+          echo "CHROME_BIN=$(which chrome)" >> $GITHUB_ENV
+          echo "CHROME_BIN = $CHROME_BIN"
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Build
+        run: |
+          cd UI/src/ClientApp/
+          npm install
+          npm run build-prod
